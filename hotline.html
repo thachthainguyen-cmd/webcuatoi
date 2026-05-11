@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <title>Liên hệ</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body { background-color: #f8f9fa; }
+    .row.content { min-height: 600px; }
+    .sidenav { background-color: #1a3a5c; height: 100%; padding-top: 20px; }
+    .sidenav h4 { color: #fff; text-align: center; letter-spacing: 2px; }
+    .sidenav img { display: block; margin: 10px auto; border: 3px solid #fff; }
+    .sidenav .nav-pills > li > a { color: #cde; border-radius: 0; }
+    .sidenav .nav-pills > li.active > a,
+    .sidenav .nav-pills > li > a:hover { background-color: #2e6da4; color: #fff; }
+    .main-content { padding: 30px; }
+    .main-content h2 { color: #1a3a5c; border-left: 5px solid #2e6da4; padding-left: 12px; }
+    .contact-card { background: #fff; border: 1px solid #d0dce8; border-radius: 6px; padding: 20px; margin-bottom: 20px; }
+    .contact-card .glyphicon { color: #2e6da4; font-size: 22px; margin-right: 10px; }
+    .contact-card p { margin: 0; font-size: 15px; }
+    .contact-card strong { color: #1a3a5c; }
+    .form-control:focus { border-color: #2e6da4; box-shadow: 0 0 6px rgba(46,109,164,0.3); }
+    .btn-primary { background-color: #2e6da4; border-color: #1a3a5c; }
+    .btn-primary:hover { background-color: #1a3a5c; }
+    footer { background-color: #1a3a5c; color: #aac; padding: 15px; text-align: center; }
+    #successMsg { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>TÔI</h4>
+      <img src="thachthainguyen.png" class="img-circle" width="140" height="140" alt="Ảnh cá nhân"><br>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="trangchu.html">Trang chủ</a></li>
+        <li><a href="gioithieu.html">Giới thiệu</a></li>
+        <li><a href="trainghiem.html">Trải nghiệm</a></li>
+        <li><a href="chiase.html">Chia sẻ</a></li>
+        <li class="active"><a href="hotline.html">Liên hệ</a></li>
+      </ul>
+    </div>
+
+    <div class="col-sm-9 main-content">
+      <h2>Liên hệ</h2>
+      <hr>
+
+      <p class="text-muted">Nếu bạn muốn kết nối hoặc có điều gì muốn nói, đừng ngại liên hệ nhé!</p>
+
+      <!-- Thông tin liên hệ -->
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="contact-card">
+            <span class="glyphicon glyphicon-envelope"></span>
+            <strong>Email</strong>
+            <p>thachthainguyen@gmail.com</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="contact-card">
+            <span class="glyphicon glyphicon-phone"></span>
+            <strong>Điện thoại</strong>
+            <p>0909 xxx xxx</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="contact-card">
+            <span class="glyphicon glyphicon-map-marker"></span>
+            <strong>Địa chỉ</strong>
+            <p>Trà Vinh, Việt Nam</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="contact-card">
+            <span class="glyphicon glyphicon-education"></span>
+            <strong>Trường</strong>
+            <p>Đại học Trà Vinh</p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      <h4>Gửi tin nhắn cho tôi</h4>
+
+      <!-- Form liên hệ -->
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="form-group">
+            <label for="tenNguoiGui">Họ và tên</label>
+            <input type="text" class="form-control" id="tenNguoiGui" placeholder="Nhập họ tên của bạn">
+          </div>
+          <div class="form-group">
+            <label for="emailNguoiGui">Email</label>
+            <input type="email" class="form-control" id="emailNguoiGui" placeholder="Nhập email của bạn">
+          </div>
+          <div class="form-group">
+            <label for="chuDe">Chủ đề</label>
+            <input type="text" class="form-control" id="chuDe" placeholder="Chủ đề tin nhắn">
+          </div>
+          <div class="form-group">
+            <label for="noiDung">Nội dung</label>
+            <textarea class="form-control" id="noiDung" rows="5" placeholder="Nội dung bạn muốn nhắn..."></textarea>
+          </div>
+          <button class="btn btn-primary" onclick="guiTinNhan()">
+            <span class="glyphicon glyphicon-send"></span> Gửi tin nhắn
+          </button>
+
+          <div id="successMsg" class="alert alert-success" style="margin-top:15px;">
+            <span class="glyphicon glyphicon-ok"></span> Cảm ơn bạn đã liên hệ! Tôi sẽ phản hồi sớm nhất có thể.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid">
+  <p>Thạch Thái Nguyên  &mdash; Đại học Trà Vinh</p>
+</footer>
+
+<script>
+  function guiTinNhan() {
+    var ten = document.getElementById('tenNguoiGui').value.trim();
+    var email = document.getElementById('emailNguoiGui').value.trim();
+    var noiDung = document.getElementById('noiDung').value.trim();
+
+    if (!ten || !email || !noiDung) {
+      alert('Vui lòng điền đầy đủ họ tên, email và nội dung!');
+      return;
+    }
+
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('tenNguoiGui').value = '';
+    document.getElementById('emailNguoiGui').value = '';
+    document.getElementById('chuDe').value = '';
+    document.getElementById('noiDung').value = '';
+  }
+</script>
+
+</body>
+</html>

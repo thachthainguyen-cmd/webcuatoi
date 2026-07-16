@@ -1,119 +1,203 @@
-<!DOCTYPE html>
-<html lang="vi">
+<!DOCTYPE html> <!-- Khai báo tiêu chuẩn tài liệu HTML5 -->
+<html lang="vi"> <!-- Thiết lập ngôn ngữ trang web là tiếng Việt -->
 <head>
-  <title>Trang chủ</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <meta charset="UTF-8" /> <!-- Thiết lập bảng mã ký tự UTF-8 để hiển thị đúng tiếng Việt -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Tối ưu hóa hiển thị cho các thiết bị di động -->
+  <title>Du Lịch Việt Nam</title> <!-- Đặt tiêu đề cho trang web hiển thị trên tab trình duyệt -->
   <style>
-    body { background-color: #f8f9fa; }
-    .row.content { min-height: 600px; }
-    .sidenav { background-color: #1a3a5c; height: 100%; padding-top: 20px; }
-    .sidenav h4 { color: #fff; text-align: center; letter-spacing: 2px; }
-    .sidenav img { display: block; margin: 10px auto; border: 3px solid #fff; }
-    .sidenav .nav-pills > li > a { color: #cde; border-radius: 0; }
-    .sidenav .nav-pills > li.active > a,
-    .sidenav .nav-pills > li > a:hover { background-color: #2e6da4; color: #fff; }
-    .main-content { padding: 30px; }
-    .main-content h2 { color: #1a3a5c; border-left: 5px solid #2e6da4; padding-left: 12px; }
-    .well { background-color: #fff; border: 1px solid #d0dce8; }
-    .well h4 { color: #2e6da4; margin-top: 0; }
-    footer { background-color: #1a3a5c; color: #aac; padding: 15px; text-align: center; }
-    .label-info { background-color: #2e6da4; }
+    * { margin: 0; padding: 0; box-sizing: border-box; } /* Thiết lập mặc định: xóa mọi khoảng cách dư thừa và tính toán kích thước bao gồm đường viền */
+    body { font-family: 'Segoe UI', sans-serif; color: #222; background-color: #fcfcfc; } /* Định dạng font chữ, màu chữ và màu nền cho toàn bộ trang */
+
+    /* HEADER */
+    header {
+      /* Tạo nền bằng lớp phủ màu đen mờ và hình ảnh, định dạng ảnh nền không lặp lại và phủ đầy khung */
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+      color: white; text-align: center; padding: 100px 20px; /* Căn giữa chữ và tạo khoảng cách nội dung bên trong */
+    }
+    header h1 { font-size: 3rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; } /* Định dạng tiêu đề chính: kích thước lớn, chữ hoa, giãn chữ */
+    header p { font-size: 1.2rem; opacity: 0.9; } /* Định dạng đoạn văn trong header với độ mờ nhẹ */
+
+    /* NAVIGATION */
+    nav {
+      background: #0077b6; display: flex; justify-content: center; /* Sử dụng Flexbox để căn giữa thanh điều hướng */
+      gap: 15px; padding: 14px; flex-wrap: wrap; /* Tạo khoảng cách giữa các mục và cho phép xuống hàng khi màn hình nhỏ */
+      position: sticky; top: 0; z-index: 1000; /* Cố định thanh menu trên cùng khi người dùng cuộn trang */
+    }
+    nav a {
+      color: white; text-decoration: none; padding: 8px 20px; /* Định dạng link: bỏ gạch chân và tạo khối bao quanh */
+      border-radius: 20px; font-weight: 600; transition: all 0.2s; /* Bo tròn góc và thêm hiệu ứng chuyển động mượt */
+    }
+    nav a:hover, nav a.active { background: #005f8e; } /* Đổi màu nền khi di chuột vào hoặc tại trang đang chọn */
+
+    /* INTRO SECTION */
+    .intro { text-align: center; padding: 50px 20px 30px; } /* Căn giữa nội dung phần giới thiệu với khoảng đệm xung quanh */
+    .intro h2 { font-size: 2rem; color: #0077b6; margin-bottom: 12px; } /* Định dạng tiêu đề phần giới thiệu */
+    .intro p { color: #555; max-width: 700px; margin-inline: auto; font-size: 1.05rem; line-height: 1.6; } /* Giới hạn độ rộng đoạn văn và căn giữa */
+
+    /* MIEN SECTION */
+    .mien-section { padding: 40px 10%; } /* Tạo lề trái/phải 10% cho các phần nội dung miền */
+    .mien-section h2.section-title {
+      font-size: 1.4rem; color: white; padding: 10px 24px; /* Định dạng tiêu đề miền: chữ trắng, có padding */
+      border-radius: 30px; display: inline-block; margin-bottom: 25px; /* Bo góc và đưa về dạng khối nội tuyến */
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Tạo bóng đổ nhẹ cho tiêu đề */
+    }
+    .mien-bac h2.section-title  { background: #c0392b; } /* Màu đỏ cho tiêu đề miền Bắc */
+    .mien-trung h2.section-title { background: #d35400; } /* Màu cam cho tiêu đề miền Trung */
+    .mien-nam h2.section-title  { background: #27ae60; } /* Màu xanh lá cho tiêu đề miền Nam */
+
+    /* CARD GRID VÀ CARD */
+    .card-grid {
+      display: grid; /* Sử dụng lưới để sắp xếp các thẻ */
+      grid-template-columns: repeat(3, 1fr); /* Chia đều không gian cho 3 cột */
+      gap: 25px; /* Tạo khoảng cách giữa các thẻ */
+    }
+    .card {
+      background: white;
+      border-radius: 12px; overflow: hidden; /* Bo tròn góc và ẩn phần nội dung dư thừa */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Tạo bóng đổ nhẹ cho thẻ */
+      transition: transform 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển động mượt */
+      display: flex;
+      flex-direction: column; /* Sắp xếp các thành phần trong thẻ theo cột */
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); } /* Hiệu ứng nổi thẻ khi di chuột */
+    .card img { width: 100%; height: 180px; object-fit: cover; display: block; } /* Cắt ảnh lấp đầy khung mà không làm méo hình */
+    
+    .card-body { 
+      padding: 18px; 
+      display: flex; 
+      flex-direction: column; 
+      flex-grow: 1; /* Cho phép nội dung giãn ra lấp đầy chiều cao thẻ */
+    }
+    .card-body h3 { font-size: 1.15rem; margin-bottom: 8px; color: #333; } /* Tiêu đề trong thẻ */
+    .card-body p { font-size: 0.9rem; color: #666; margin-bottom: 18px; line-height: 1.5; flex-grow: 1; } /* Nội dung trong thẻ */
+    
+    .card-body a {
+      display: block; text-align: center; background: #0077b6; color: white; /* Định dạng nút bấm */
+      padding: 9px; border-radius: 6px; text-decoration: none; font-size: 0.9rem;
+      font-weight: 600; transition: background 0.2s; margin-top: auto; /* Đẩy nút xuống dưới cùng của thẻ */
+    }
+    .card-body a:hover { background: #005f8e; } /* Đổi màu nút khi di chuột */
+
+    /* FOOTER */
+    footer {
+      background: #222; color: #ccc; text-align: center; /* Màu nền tối cho chân trang */
+      padding: 25px; font-size: 0.9rem; margin-top: 60px; /* Khoảng cách và cỡ chữ */
+    }
+
+    /* RESPONSIVE GIAO DIỆN DI ĐỘNG */
+    @media (max-width: 900px) { /* Cho màn hình nhỏ hơn 900px */
+      .card-grid { grid-template-columns: repeat(2, 1fr); } /* Chuyển thành 2 cột */
+      .mien-section { padding: 30px 5%; }
+    }
+    @media (max-width: 600px) { /* Cho màn hình nhỏ hơn 600px */
+      .card-grid { grid-template-columns: 1fr; } /* Chuyển thành 1 cột duy nhất */
+      header h1 { font-size: 2.2rem; } /* Giảm cỡ chữ tiêu đề */
+    }
   </style>
 </head>
 <body>
 
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav">
-      <h4>TÔI</h4>
-      <img src="thachthainguyen.png" class="img-circle" width="140" height="140" alt="Ảnh cá nhân"><br>
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="trangchu.html">Trang chủ</a></li>
-        <li><a href="gioithieu.html"> Giới thiệu</a></li>
-        <li><a href="trainghiem.html"> Trải nghiệm</a></li>
-        <li><a href="chiase.html"> Chia sẻ</a></li>
-        <li><a href="hotline.html"> Liên hệ</a></li>
-      </ul>
+<header>
+  <h1>Khám Phá Việt Nam</h1>
+  <p>Thiên đường du lịch với biển, đảo và phố cổ tuyệt đẹp</p>
+</header>
+
+<nav>
+    <a href="index.html" class="active">Trang chủ</a>
+    <a href="where.html">Địa điểm</a>
+    <a href="food.html">Ẩm thực</a>
+    <a href="vanhoa.html">Văn hóa</a>
+</nav>
+
+<div class="intro">
+  <h2>Chào mừng bạn đến với website du lịch</h2>
+  <p>Việt Nam là đất nước có nhiều danh lam thắng cảnh nổi tiếng. Hãy cùng chúng tôi hành trình khám phá vẻ đẹp độc đáo mang đậm bản sắc của cả 3 miền nhé.</p>
+</div>
+
+<div class="mien-section mien-bac">
+  <h2 class="section-title">🔴 Miền Bắc</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=500" alt="Vịnh Hạ Long">
+      <div class="card-body">
+        <h3>Vịnh Hạ Long</h3>
+        <p>Kỳ quan thiên nhiên thế giới với hàng nghìn đảo đá vôi kỳ vĩ và dòng nước xanh ngọc bích.</p>
+        <a href="vinhhalong.html">Xem chi tiết</a>
+      </div>
     </div>
-
-    <div class="col-sm-9 main-content">
-      <h2>Thông tin cá nhân</h2>
-      <hr>
-
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Họ và tên</h4>
-            <p>Thạch Thái Nguyên</p>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Ngày sinh</h4>
-            <p>28/10/2007</p>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Quê quán</h4>
-            <p>Trà Vinh</p>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Trường</h4>
-            <p>Đại học Trà Vinh</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Sở thích</h4>
-            <p>Nghe nhạc, đá bóng</p>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Không thích</h4>
-            <p>Dậy sớm</p>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Môn yêu thích</h4>
-            <p>Thể dục, Tin học</p>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Màu yêu thích</h4>
-            <p>Xanh navy</p>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-      <h4>Câu nói tôi thích</h4>
-      <div class="well">
-        <p><em>"Đừng so sánh hành trình của mình với người khác. Mỗi người có một xuất phát điểm khác nhau, một đích đến khác nhau."</em></p>
-      </div>
-
-      <div class="well">
-        <p>Cảm ơn bạn đã ghé thăm trang của tôi! </p>
+    <div class="card">
+      <img src="https://eggyolk.vn/wp-content/uploads/2024/08/Nhung-dia-diem-tham-quan-mien-phi-o-ha-noi.jpg" alt="Hà Nội">
+      <div class="card-body">
+        <h3>Hà Nội</h3>
+        <p>Thủ đô nghìn năm văn hiến mang nét đẹp trầm mặc cổ kính của 36 phố phường và Hồ Hoàn Kiếm.</p>
+        <a href="hanoi.html">Xem chi tiết</a>
+      </div>    
+    </div>
+    <div class="card">
+      <img src="https://cdn.ahit.vn/thanhthanhtours/wp-content/uploads/2024/11/05163542/du-lich-sapa-cover.jpg" alt="Sa Pa">
+      <div class="card-body">
+        <h3>Sa Pa</h3>
+        <p>Thị trấn sương mù huyền ảo với những thửa ruộng bậc thang tuyệt đẹp trải dài ngút ngàn.</p>
+        <a href="sapa.html">Xem chi tiết</a>
       </div>
     </div>
   </div>
 </div>
 
-<footer class="container-fluid">
-  <p>Thạch Thái Nguyên  &mdash; Đại học Trà Vinh</p>
-</footer>
+<div class="mien-section mien-trung" style="background:#fcf5f0">
+  <h2 class="section-title">🟠 Miền Trung</h2>
+  <div class="card-grid">
+    <!-- ĐÃ XÓA CARD ĐÀ NẴNG TẠI ĐÂY -->
+    <div class="card">
+      <img src="https://langchaixua.com/wp-content/uploads/2024/10/z5984579390265_88f45fb549228bdac2f9e9efc75d257b.jpg" alt="Hội An">
+      <div class="card-body">
+        <h3>Hội An</h3>
+        <p>Phố cổ lung linh sắc đèn lồng về đêm, mang đậm nét giao thoa văn hóa kiến trúc Đông Tây xưa cũ.</p>
+        <a href="hoian.html">Xem chi tiết</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://cdn-media.sforum.vn/storage/app/media/wp-content/uploads/2024/01/cac-dia-diem-du-lich-o-hue-thumb.jpg" alt="Huế">
+      <div class="card-body">
+        <h3>Huế</h3>
+        <p>Cố đô mộng mơ và cổ kính với hệ thống cung điện, lăng tẩm vương triều Nguyễn uy nghiêm.</p>
+        <a href="hue.html">Xem chi tiết</a>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="mien-section mien-nam">
+  <h2 class="section-title">🟢 Miền Nam</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="https://i2.ex-cdn.com/crystalbay.com/files/content/2024/11/25/phu-quoc-3-1034.jpg" alt="Phú Quốc">
+      <div class="card-body">
+        <h3>Phú Quốc</h3>
+        <p>Hòn đảo ngọc hoang sơ tuyệt mỹ với những bãi cát trắng mịn, làn nước trong xanh cùng resort đẳng cấp.</p>
+        <a href="phuquoc.html">Xem chi tiết</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images2.thanhnien.vn/528068263637045248/2023/11/17/toan-canh-dinh-17001962562891159500231.jpg" alt="Tây Ninh">
+      <div class="card-body">
+        <h3>Tây Ninh</h3>
+        <p>Vùng đất linh thiêng nổi tiếng với ngọn núi Bà Đen hùng vĩ cùng kiến trúc độc đáo của Tòa Thánh Cao Đài.</p>
+        <a href="tayninh.html">Xem chi tiết</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://imagevietnam.vnanet.vn//MediaUpload/Org/2024/05/18/hcml-118-15-18-25.jpg" alt="TP. HCM">
+      <div class="card-body">
+        <h3>TP. Hồ Chí Minh</h3>
+        <p>Trung tâm kinh tế sầm uất, hoa lệ, luôn chuyển mình đầy năng động bất kể ngày đêm.</p>
+        <a href="hochiminh.html">Xem chi tiết</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Du Lịch Việt Nam | Website giới thiệu du lịch ba miền</footer>
 </body>
 </html>

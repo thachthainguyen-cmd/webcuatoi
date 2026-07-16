@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="vi"><head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+  <title>Tây Ninh - Điểm Hẹn Tâm Linh & Kỳ Vĩ</title>  
+  <style>    
+    /* Import Font Poppins mang hơi hướng công nghệ, hiện đại */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }    
+    body { font-family: 'Poppins', sans-serif; color: #2d3436; background-color: #f4f7f6; line-height: 1.7; -webkit-font-smoothing: antialiased; }    
+    
+    /* 1. Thanh Menu (Giữ nguyên màu xanh của ảnh image_35ce62.png) */
+    nav { 
+      background: #0071ba; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      gap: 15px; 
+      padding: 16px 20px; 
+      position: fixed; top: 0; left: 0; right: 0; 
+      z-index: 1000; 
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }    
+    nav a { 
+      color: rgba(255, 255, 255, 0.9); 
+      text-decoration: none; 
+      font-weight: 500; 
+      font-size: 0.95rem; 
+      transition: all 0.3s ease; 
+      padding: 8px 24px; 
+      border-radius: 25px; 
+    }    
+    nav a:hover { background: rgba(255, 255, 255, 0.2); color: #ffffff; }
+    nav a.active { background: #00558c; color: #ffffff; }
+    
+    /* 2. Hero Section kiểu Bento Box (Bo tròn, cách lề) */
+    .hero-container { max-width: 1300px; margin: 90px auto 0; padding: 0 20px; }
+    .hero-banner { 
+      position: relative; 
+      width: 100%; 
+      height: 60vh; 
+      background: url('https://thanhnien.mediacdn.vn/Uploaded/phuongcg/2022_11_27/cuoc-thi-anh-dep-du-lich-tay-ninh-2022-1-5025.jpg') center/cover no-repeat; 
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: flex-end;
+      padding: 50px;
+    }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 60%); }
+    .hero-content { position: relative; color: white; z-index: 10; width: 100%; }
+    .hero-content h1 { font-size: 4rem; font-weight: 700; margin-bottom: 10px; line-height: 1.1; }
+    .hero-content p { font-size: 1.2rem; font-weight: 300; opacity: 0.9; }
+
+    /* 3. Stats Bar (Khối nổi lơ lửng ngay dưới Banner) */
+    .stats-bar { 
+      display: flex; 
+      justify-content: space-around; 
+      background: #ffffff; 
+      border-radius: 20px; 
+      padding: 30px; 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+      margin: -40px auto 60px; 
+      position: relative; 
+      z-index: 10; 
+      max-width: 1000px; 
+      width: 90%;
+    }
+    .stat-item { text-align: center; }
+    .stat-item h4 { color: #0071ba; font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+    .stat-item p { color: #636e72; font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Layout Content */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }    
+    
+    /* Intro Text Căn Giữa */
+    .intro-text { text-align: center; max-width: 800px; margin: 0 auto 70px; }
+    .intro-text h2 { font-size: 2rem; color: #2d3436; margin-bottom: 20px; }
+    .intro-text p { font-size: 1.1rem; color: #636e72; }
+
+    /* 4. Zig-Zag Layout (Đan xen ảnh và chữ) */
+    .zigzag-row { display: flex; align-items: center; gap: 60px; margin-bottom: 80px; }
+    .zigzag-row:nth-child(even) { flex-direction: row-reverse; } /* Đảo ngược hàng chẵn */
+    
+    .zigzag-img-wrapper { flex: 1; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .zigzag-img-wrapper img { width: 100%; height: 380px; object-fit: cover; transition: transform 0.5s ease; display: block; }
+    .zigzag-img-wrapper:hover img { transform: scale(1.05); }
+    
+    .zigzag-text { flex: 1; }
+    .zigzag-text span { display: inline-block; padding: 6px 16px; background: #e1f0fa; color: #0071ba; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
+    .zigzag-text h3 { font-size: 1.8rem; color: #2d3436; margin-bottom: 15px; font-weight: 600; line-height: 1.3; }
+    .zigzag-text p { font-size: 1.05rem; color: #636e72; }
+
+    /* 5. Khối cẩm nang thông tin (Grid) */
+    .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 80px; }
+    .guide-card { background: #ffffff; padding: 40px; border-radius: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #edf2f7; transition: transform 0.3s; }
+    .guide-card:hover { transform: translateY(-10px); border-color: #0071ba; }
+    .guide-card .icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
+    .guide-card h4 { font-size: 1.3rem; margin-bottom: 15px; color: #2d3436; }
+    .guide-card p { color: #636e72; font-size: 0.95rem; }
+
+    /* Footer */
+    footer { background: #2d3436; color: #b2bec3; text-align: center; padding: 40px 20px; font-size: 0.9rem; }    
+    
+    /* Responsive */
+    @media (max-width: 900px) { 
+      .zigzag-row, .zigzag-row:nth-child(even) { flex-direction: column; gap: 30px; text-align: center; } 
+      .guide-grid { grid-template-columns: 1fr; }
+      .hero-content h1 { font-size: 2.5rem; }
+      .hero-banner { height: 50vh; border-radius: 20px; padding: 30px; }
+      .stats-bar { flex-wrap: wrap; gap: 20px; justify-content: center; }
+      .stat-item { width: 45%; }
+    }  
+  </style></head><body>  
+
+  <nav>    
+    <a href="index.html">Trang chủ</a>    
+    <a href="where.html" class="active">Địa điểm</a>    
+    <a href="amthuc.html">Ẩm thực</a>    
+    <a href="vanhoa.html">Văn hóa</a>  
+  </nav>  
+
+  <div class="hero-container">
+    <div class="hero-banner">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Du Lịch Tây Ninh</h1>      
+        <p>Hành trình tìm về Nóc nhà Nam Bộ và thánh địa tâm linh</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <h4>Đông Nam Bộ</h4>
+      <p>Vị Trí</p>
+    </div>
+    <div class="stat-item">
+      <h4>⭐ 4.8</h4>
+      <p>Đánh Giá</p>
+    </div>
+    <div class="stat-item">
+      <h4>986 mét</h4>
+      <p>Độ Cao Núi Bà</p>
+    </div>
+  </div>
+
+  <div class="container">    
+    <div class="intro-text">
+      <h2>Vùng Đất Biểu Tượng Của Văn Hóa Và Thiên Nhiên</h2>
+      <p>Tây Ninh không chỉ thu hút du khách ngoài đời thực bởi cảnh quan núi non hùng vĩ độc bản giữa đồng bằng, mà còn là vùng đất thánh linh thiêng với những công trình kiến trúc tôn giáo vĩ đại, mang đậm bản sắc văn hóa vùng Nam Bộ.</p>
+    </div>
+
+    <div class="zigzag-row">
+      <div class="zigzag-img-wrapper">
+        <img src="https://tienphongtourist.com/images/stories/virtuemart/product/dinh-van-son-nui-ba-den-tay-ninh.jpg" alt="Chinh phục núi Bà Đen bằng cáp treo">
+      </div>
+      <div class="zigzag-text">
+        <span>Kỳ vĩ</span>
+        <h3>Chinh phục đỉnh núi Bà Đen huyền thoại</h3>
+        <p>Được mệnh danh là "Nóc nhà Nam Bộ" với độ cao 986m, núi Bà Đen quanh năm mây phủ trắng xóa. Trải nghiệm hệ thống cáp treo hiện đại lướt qua những tầng mây, ngắm nhìn tượng Phật Bà Tây Bổ Đà Sơn bằng đồng cao nhất châu Á và quần thể kiến trúc tâm linh nguy nga trên đỉnh núi.</p>
+      </div>
+    </div>
+
+    <div class="zigzag-row">
+      <div class="zigzag-img-wrapper">
+        <img src="https://statics.vinpearl.com/toa-thanh-tay-ninh-2_1624592379.jpg" alt="Toà thánh Tây Ninh nguy nga">
+      </div>
+      <div class="zigzag-text">
+        <span>Kiến trúc độc bản</span>
+        <h3>Chiêm ngưỡng Tòa Thánh Tây Ninh</h3>
+        <p>Tòa Thánh Tây Ninh là tổ đình của đạo Cao Đài, một công trình kiến trúc tôn giáo độc nhất vô nhị trên thế giới ngoài đời thực. Sự kết hợp hài hòa giữa nét kiến trúc Á - Âu với những cột rồng uốn lượn rực rỡ sắc màu tạo nên một không gian huyền bí, trang nghiêm đầy ấn tượng.</p>
+      </div>
+    </div>
+
+    <div class="zigzag-row">
+      <div class="zigzag-img-wrapper">
+        <img src="https://bloganchoi.com/wp-content/uploads/2016/07/ho-dau-tieng-dep.jpg" alt="Hồ Dầu Tiếng bình yên">
+      </div>
+      <div class="zigzag-text">
+        <span>Thư giãn</span>
+        <h3>Cắm trại bên bờ Hồ Dầu Tiếng</h3>
+        <p>Hồ Dầu Tiếng là một trong những hồ nước nhân tạo lớn nhất Đông Nam Á. Nơi đây là điểm hẹn hoàn hảo cho những ai yêu thích cắm trại ngoài trời, ngắm cảnh hoàng hôn buông xuống mặt hồ phẳng lặng và thưởng thức không khí trong lành, tách biệt hoàn toàn khỏi phố thị ồn ào.</p>
+      </div>
+    </div>
+
+    <div class="guide-grid">
+      <div class="guide-card">
+        <span class="icon">☀️</span>
+        <h4>Mùa Săn Mây Lý Tưởng</h4>
+        <p>Bạn có thể du lịch Tây Ninh quanh năm. Tuy nhiên, từ tháng 12 đến tháng 4 năm sau là mùa khô, trời trong xanh rực nắng, rất phù hợp cho hoạt động leo núi và ngắm toàn cảnh đồng bằng từ trên cao.</p>
+      </div>
+      <div class="guide-card">
+        <span class="icon">🌶️</span>
+        <h4>Ẩm Thực Đặc Sản Nổi Tiếng</h4>
+        <p>Bánh tráng phơi sương Trảng Bàng cuốn thịt luộc rau rừng, muối ớt tôm Tây Ninh cay nồng biểu tượng, thằn lằn núi và ốc núi Bà Đen bổ dưỡng, cùng món nem bưởi chay độc đáo.</p>
+      </div>
+    </div>
+
+  </div>  
+
+  <footer>© 2026 Du Lịch Việt Nam | Khám phá vùng đất thánh Tây Ninh</footer>
+</body></html>

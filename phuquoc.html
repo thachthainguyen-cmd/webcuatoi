@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Đảo Phú Quốc - Giao Diện Hiện Đại</title>
+    
+    <style>
+        /* Import Font Poppins mang hơi hướng công nghệ, hiện đại */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        /* Reset CSS cơ bản */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Cấu hình chung cho toàn trang */
+        body { font-family: 'Poppins', sans-serif; color: #2d3436; background-color: #f4f7f6; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        
+        /* 1. Thanh Menu cố định trên đầu */
+        nav { 
+            background: #0071ba; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            gap: 15px; 
+            padding: 16px 20px; 
+            position: fixed; top: 0; left: 0; right: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        nav a { 
+            color: rgba(255, 255, 255, 0.9); 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 0.95rem; 
+            transition: all 0.3s ease; 
+            padding: 8px 24px; 
+            border-radius: 25px; 
+        }
+        nav a:hover { background: rgba(255, 255, 255, 0.2); color: #ffffff; }
+        nav a.active { background: #00558c; color: #ffffff; }
+        
+        /* 2. Hero Section: Khối banner lớn đầu trang */
+        .hero-container { max-width: 1300px; margin: 90px auto 0; padding: 0 20px; }
+        .hero-banner { 
+            position: relative; 
+            width: 100%; 
+            height: 60vh; 
+            background: url('https://bcp.cdnchinhphu.vn/334894974524682240/2025/6/23/phu-quoc-17506756503251936667562.jpg') center/cover no-repeat; 
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: flex-end;
+            padding: 50px;
+        }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 60%); }
+        .hero-content { position: relative; color: white; z-index: 10; width: 100%; }
+        .hero-content h1 { font-size: 4rem; font-weight: 700; margin-bottom: 10px; line-height: 1.1; }
+        .hero-content p { font-size: 1.2rem; font-weight: 300; opacity: 0.9; }
+
+        /* 3. Stats Bar: Khối thông tin nổi lơ lửng dưới banner */
+        .stats-bar { 
+            display: flex; 
+            justify-content: space-around; 
+            background: #ffffff; 
+            border-radius: 20px; 
+            padding: 30px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+            margin: -40px auto 60px; 
+            position: relative; 
+            z-index: 10; 
+            max-width: 1000px; 
+            width: 90%;
+        }
+        .stat-item { text-align: center; }
+        .stat-item h4 { color: #0071ba; font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+        .stat-item p { color: #636e72; font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Layout Content chính */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .intro-text { text-align: center; max-width: 800px; margin: 0 auto 70px; }
+        .intro-text h2 { font-size: 2rem; color: #2d3436; margin-bottom: 20px; }
+        .intro-text p { font-size: 1.1rem; color: #636e72; }
+
+        /* 4. Zig-Zag Layout: Đan xen ảnh và văn bản */
+        .zigzag-row { display: flex; align-items: center; gap: 60px; margin-bottom: 80px; }
+        .zigzag-row:nth-child(even) { flex-direction: row-reverse; } /* Đảo vị trí hàng chẵn */
+        .zigzag-img-wrapper { flex: 1; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .zigzag-img-wrapper img { width: 100%; height: 380px; object-fit: cover; transition: transform 0.5s ease; display: block; }
+        .zigzag-img-wrapper:hover img { transform: scale(1.05); }
+        .zigzag-text { flex: 1; }
+        .zigzag-text span { display: inline-block; padding: 6px 16px; background: #e1f0fa; color: #0071ba; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
+        .zigzag-text h3 { font-size: 1.8rem; color: #2d3436; margin-bottom: 15px; font-weight: 600; line-height: 1.3; }
+        .zigzag-text p { font-size: 1.05rem; color: #636e72; }
+
+        /* 5. Guide Grid: Các thẻ thông tin cẩm nang */
+        .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 80px; }
+        .guide-card { background: #ffffff; padding: 40px; border-radius: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #edf2f7; transition: transform 0.3s; }
+        .guide-card:hover { transform: translateY(-10px); border-color: #0071ba; }
+        .guide-card .icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
+        .guide-card h4 { font-size: 1.3rem; margin-bottom: 15px; color: #2d3436; }
+        .guide-card p { color: #636e72; font-size: 0.95rem; }
+
+        /* Footer */
+        footer { background: #2d3436; color: #b2bec3; text-align: center; padding: 40px 20px; font-size: 0.9rem; }
+        
+        /* Responsive: Tối ưu cho thiết bị di động */
+        @media (max-width: 900px) { 
+            .zigzag-row, .zigzag-row:nth-child(even) { flex-direction: column; gap: 30px; text-align: center; } 
+            .guide-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-banner { height: 50vh; border-radius: 20px; padding: 30px; }
+            .stats-bar { flex-wrap: wrap; gap: 20px; justify-content: center; }
+            .stat-item { width: 45%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menu điều hướng -->
+    <nav>
+        <a href="index.html">Trang chủ</a>
+        <a href="where.html" class="active">Địa điểm</a>
+        <a href="amthuc.html">Ẩm thực</a>
+        <a href="vanhoa.html">Văn hóa</a>
+    </nav>
+
+    <!-- Khu vực hình ảnh chính -->
+    <div class="hero-container">
+        <div class="hero-banner">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Đảo Phú Quốc</h1>
+                <p>Viên ngọc bích ẩn mình giữa vịnh Thái Lan</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thanh hiển thị thông số nhanh -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <h4>Kiên Giang</h4>
+            <p>Vị Trí</p>
+        </div>
+        <div class="stat-item">
+            <h4>⭐ 4.9</h4>
+            <p>Đánh Giá</p>
+        </div>
+        <div class="stat-item">
+            <h4>574 km²</h4>
+            <p>Diện Tích</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Đoạn văn giới thiệu -->
+        <div class="intro-text">
+            <h2>Thiên Đường Nghỉ Dưỡng Số 1 Việt Nam</h2>
+            <p>Đảo Phú Quốc là hòn đảo lớn nhất Việt Nam, nơi thu hút du khách bởi những bãi biển cát trắng mịn trải dài, làn nước trong vắt thấu đáy và hệ sinh thái san hô rực rỡ. Không chỉ có thiên nhiên tuyệt mỹ, nơi đây hiện nay còn sở hữu các siêu quần thể vui chơi giải trí đẳng cấp thế giới.</p>
+        </div>
+
+        <!-- Các khối thông tin dạng Zíc-Zắc -->
+        <div class="zigzag-row">
+            <div class="zigzag-img-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfUkRU2cBfS54qvZj1h_2wp7g9wPJuAe8nWRMdz5_5kvDhNYHAHbiwyyY&s=10" alt="Hoàng hôn bãi Trường">
+            </div>
+            <div class="zigzag-text">
+                <span>Trải nghiệm</span>
+                <h3>Ngắm hoàng hôn rực rỡ nhất Việt Nam</h3>
+                <p>Bãi Trường tại Đảo Phú Quốc được mệnh danh là một trong những tọa độ ngắm hoàng hôn trên biển đẹp nhất bờ cõi. Cảm giác ngồi nhâm nhi ly cocktail, chờ đợi mặt trời đỏ rực từ từ chìm xuống đại dương bao la nhuộm tím cả bầu trời chắc chắn sẽ khiến bạn không thể nào quên.</p>
+            </div>
+        </div>
+
+        <div class="zigzag-row">
+            <div class="zigzag-img-wrapper">
+                <img src="https://vj-prod-website-cms.s3.ap-southeast-1.amazonaws.com/depositphotos54387583xl-1719191773890.jpg" alt="Ngắm san hô">
+            </div>
+            <div class="zigzag-text">
+                <span>Khám phá</span>
+                <h3>Lặn ngắm san hô tại Quần đảo An Thới</h3>
+                <p>Thuê một chiếc cano ghé thăm hòn Móng Tay, hòn Gầm Ghì hay hòn Mây Rút để hòa mình vào làn nước mát lạnh. Bạn sẽ được tận mắt chiêm ngưỡng hệ sinh thái đại dương phong phú với vô vàn đàn cá nhỏ tung tăng bơi lội quanh những rạn san hô tự nhiên.</p>
+            </div>
+        </div>
+
+        <div class="zigzag-row">
+            <div class="zigzag-img-wrapper">
+                <img src="https://cdn.vivutour.vn/2025/12/Cap-Treo-Hon-Thom-phu-quoc.jpg" alt="Cáp treo Hòn Thơm">
+            </div>
+            <div class="zigzag-text">
+                <span>Kỷ lục thế giới</span>
+                <h3>Cáp treo 3 dây vượt biển Hòn Thơm</h3>
+                <p>Trải nghiệm lướt đi giữa không trung trên tuyến cáp treo vượt biển dài nhất thế giới. Từ cabin kính, bạn có thể thu trọn vào tầm mắt toàn cảnh quần đảo Nam An Thới, ngắm nhìn biển xanh ngắt và những chiếc tàu đánh cá hối hả rẽ sóng.</p>
+            </div>
+        </div>
+
+        <!-- Khối thông tin cẩm nang -->
+        <div class="guide-grid">
+            <div class="guide-card">
+                <span class="icon">☀️</span>
+                <h4>Thời Điểm Lý Tưởng</h4>
+                <p>Từ tháng 11 đến tháng 4 năm sau là mùa khô tại Đảo. Biển tĩnh lặng, sóng êm, cực kỳ hoàn hảo.</p>
+            </div>
+            <div class="guide-card">
+                <span class="icon">🦑</span>
+                <h4>Đặc Sản Nức Tiếng</h4>
+                <p>Đừng quên thưởng thức bún quậy Kiến Xây, gỏi cá trích, ghẹ Hàm Ninh và nhum biển nướng.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Chân trang -->
+    <footer>© 2026 Du Lịch Việt Nam | Khám phá Đảo Phú Quốc</footer>
+</body>
+</html>

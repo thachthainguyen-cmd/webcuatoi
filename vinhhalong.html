@@ -1,0 +1,161 @@
+<!DOCTYPE html> <!-- Khai báo đây là tài liệu HTML5 -->
+<html lang="vi"> <!-- Thiết lập ngôn ngữ của trang web là tiếng Việt -->
+<head>   
+  <meta charset="UTF-8" />   <!-- Thiết lập bảng mã ký tự UTF-8 để hiển thị tiếng Việt chính xác -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>   <!-- Cấu hình hiển thị linh hoạt trên các thiết bị di động -->
+  <title>Vịnh Hạ Long - Du Lịch Việt Nam</title>   <!-- Tiêu đề của trang web trên tab trình duyệt -->
+  <style>    
+    /* Import Font Inter Siêu Sang */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap'); /* Nhập font chữ Inter từ Google Fonts */
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }     /* Reset toàn bộ khoảng cách lề và đệm của các phần tử */
+    body { font-family: 'Inter', sans-serif; color: #111111; background-color: #ffffff; line-height: 1.8; -webkit-font-smoothing: antialiased; }     /* Thiết lập kiểu chữ, màu sắc và độ mượt của chữ cho trang */
+    
+    /* Thanh Navigation đồng bộ cao cấp */
+    nav { 
+      background: #0071ba; /* Màu nền cho thanh menu */
+      display: flex; /* Sử dụng flexbox để bố trí nội dung menu */
+      justify-content: center; /* Căn giữa nội dung trong menu */
+      align-items: center; /* Căn dọc các phần tử trong menu */
+      gap: 15px; /* Khoảng cách giữa các mục menu */
+      padding: 15px 20px; /* Khoảng đệm bên trong menu */
+      position: fixed; /* Cố định vị trí thanh menu khi cuộn trang */
+      top: 0; /* Đặt menu sát mép trên */
+      left: 0; /* Đặt menu sát mép trái */
+      right: 0; /* Đặt menu sát mép phải */
+      z-index: 1000; /* Đảm bảo menu luôn nằm trên các thành phần khác */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho thanh menu */
+    }    
+    nav a { 
+      color: #ffffff; /* Màu chữ cho các liên kết trong menu */
+      text-decoration: none; /* Loại bỏ gạch chân mặc định của liên kết */
+      font-weight: 600; /* Độ đậm của chữ menu */
+      font-size: 0.95rem; /* Kích thước chữ menu */
+      transition: all 0.25s ease; /* Hiệu ứng chuyển đổi màu mượt mà */
+      padding: 8px 20px; /* Khoảng đệm cho các mục menu */
+      border-radius: 20px; /* Bo góc cho các nút menu */
+    }    
+    nav a:hover { 
+      background: rgba(0, 0, 0, 0.1); /* Màu nền khi di chuột vào mục menu */
+    }
+    nav a.active { 
+      background: #00558c; /* Màu nền cho mục menu đang được chọn */
+      color: #ffffff; /* Màu chữ cho mục menu đang được chọn */
+    }
+    
+    /* Premium Hero Section - Banner góc rộng vịnh Hạ Long hùng vĩ */
+    .hero-banner { position: relative; width: 100%; height: 65vh; background: url('https://images.unsplash.com/photo-1528127269322-539801943592?w=1600') center/cover no-repeat; margin-top: 65px; display: flex; align-items: flex-end; } /* Định dạng banner chính */
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%); } /* Lớp phủ làm tối ảnh banner */
+    .hero-content { position: relative; max-width: 1140px; margin: 0 auto; width: 100%; padding: 40px 24px; color: white; z-index: 10; } /* Định dạng nội dung hiển thị trên banner */
+    .hero-content h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); } /* Định dạng tiêu đề chính trên banner */
+    
+    /* Meta Tags */
+    .place-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; font-size: 0.95rem; font-weight: 500; }     /* Định dạng các thẻ thông tin phụ phía dưới tiêu đề */
+    .rating { background: rgba(255, 255, 255, 0.25); padding: 6px 14px; border-radius: 8px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-weight: 700; }     /* Định dạng nhãn đánh giá */
+    .badge { background: #ffffff; color: #000000; padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }     /* Định dạng nhãn danh hiệu */
+    .location-tag { display: flex; align-items: center; gap: 4px; text-shadow: 0 1px 5px rgba(0,0,0,0.5); font-weight: 600; }     /* Định dạng nhãn vị trí */
+    
+    /* Layout Container */
+    .container { max-width: 1140px; margin: 40px auto; padding: 0 24px; }     /* Khung chứa nội dung trang */
+    
+    /* Breadcrumb */
+    .breadcrumb { font-size: 0.85rem; color: #888888; margin-bottom: 30px; font-weight: 500; }     /* Định dạng đường dẫn điều hướng */
+    .breadcrumb a { color: #555555; text-decoration: none; }     /* Định dạng liên kết trong breadcrumb */
+    .breadcrumb a:hover { color: #000000; text-decoration: underline; }     /* Hiệu ứng khi di chuột vào liên kết breadcrumb */
+    
+    /* Photo Gallery Grid - Các góc ảnh phụ đặc trưng */
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 50px; }     /* Định dạng lưới cho bộ sưu tập ảnh */
+    .gallery .img-box { overflow: hidden; border-radius: 12px; height: 320px; background: #f5f5f5; box-shadow: 0 4px 15px rgba(0,0,0,0.05); } /* Định dạng khung chứa ảnh */
+    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }     /* Định dạng ảnh bên trong */
+    .gallery .img-box:hover img { transform: scale(1.03); }     /* Hiệu ứng phóng to khi di chuột vào ảnh */
+    
+    /* Two Columns Content Layout */
+    .content-layout { display: grid; grid-template-columns: 1.9fr 1.1fr; gap: 60px; }     /* Bố cục 2 cột cho nội dung */
+    .main-text section { margin-bottom: 45px; }     /* Định dạng các đoạn nội dung chính */
+    .main-text h2 { color: #000000; font-size: 1.6rem; margin-bottom: 20px; font-weight: 700; letter-spacing: -0.5px; }     /* Định dạng tiêu đề đoạn */
+    .main-text p { color: #444444; margin-bottom: 20px; text-align: justify; font-size: 1.05rem; }     /* Định dạng đoạn văn bản */
+    .main-text ul { list-style: none; }     /* Loại bỏ dấu chấm mặc định của danh sách */
+    .main-text li { margin-bottom: 20px; font-size: 1.05rem; color: #444444; border-left: 2px solid #000000; padding-left: 16px; }     /* Định dạng các mục trong danh sách */
+    .main-text li b { color: #000000; font-weight: 600; display: block; margin-bottom: 4px; } /* Định dạng từ khóa in đậm trong danh sách */
+    
+    /* Modern Sidebar (Airbnb-Style Card) */
+    .sidebar { position: relative; }     /* Vị trí của cột thông tin phụ */
+    .widget { background: #ffffff; padding: 30px; border-radius: 16px; border: 1px solid #e5e7eb; box-shadow: 0 10px 30px rgba(0,0,0,0.04); position: sticky; top: 110px; }     /* Thiết kế khung thông tin dạng thẻ */
+    .widget h3 { font-size: 1.25rem; color: #000000; margin-bottom: 24px; font-weight: 700; letter-spacing: -0.3px; }     /* Tiêu đề thẻ widget */
+    .info-list { list-style: none; }     /* Danh sách thông tin không định dạng */
+    .info-list li { margin-bottom: 24px; font-size: 1rem; color: #444444; }     /* Mục thông tin trong danh sách */
+    .info-list li:last-child { margin-bottom: 0; } /* Bỏ lề dưới cho mục cuối cùng */
+    .info-list li b { color: #000000; font-weight: 700; display: block; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }     /* Định dạng tiêu đề cho mục thông tin */
+    
+    /* Minimalist Footer */
+    footer { background: #f9f9f9; color: #888888; text-align: center; padding: 50px 20px; font-size: 0.9rem; margin-top: 100px; border-top: 1px solid #eee; font-weight: 400; }     /* Định dạng chân trang */
+    
+    /* Responsive Breakpoints */
+    @media (max-width: 900px) { /* Định dạng cho màn hình nhỏ hơn 900px */
+      .gallery, .content-layout { grid-template-columns: 1fr; gap: 30px; } /* Chuyển đổi thành 1 cột */
+      .hero-content h1 { font-size: 2.3rem; } /* Thu nhỏ tiêu đề chính */
+      .hero-banner { height: 45vh; } /* Giảm chiều cao banner */
+      .widget { position: relative; top: 0; } /* Bỏ hiệu ứng dính cho widget */
+      .container { margin: 20px auto; } /* Giảm lề chứa nội dung */
+    }  
+  </style>
+</head>
+<body>   
+  <nav> <!-- Thanh menu điều hướng -->
+    <a href="index.html">Trang chủ</a> <!-- Link về trang chủ -->
+    <a href="where.html" class="active">Địa điểm</a> <!-- Link trang địa điểm (đang được chọn) -->
+    <a href="food.html">Ẩm thực</a> <!-- Link trang ẩm thực -->
+    <a href="vanhoa.html">Văn hóa</a> <!-- Link trang văn hóa -->
+  </nav>
+
+  <!-- Banner chính hiển thị toàn cảnh kỳ quan Vịnh Hạ Long -->
+  <div class="hero-banner">
+    <div class="hero-overlay"></div> <!-- Lớp phủ màu trên banner -->
+    <div class="hero-content">
+      <h1>Khám Phá Vịnh Hạ Long</h1>       <!-- Tiêu đề trên banner -->
+      <div class="place-meta">      
+        <span class="rating">⭐ 4.9 (4,850 đánh giá)</span>         <!-- Điểm đánh giá -->
+        <span class="badge">Kỳ quan thiên nhiên thế giới</span>         <!-- Nhãn trạng thái -->
+        <span class="location-tag">📍 Quảng Ninh, Việt Nam</span>       <!-- Thông tin vị trí -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container">    
+    <div class="breadcrumb"><a href="index.html">Trang chủ</a> &gt; <a href="where.html">Địa điểm</a> &gt; <span>Vịnh Hạ Long</span></div>     <!-- Đường dẫn breadcrumb -->
+    
+    <!-- Hai ảnh phụ: Hang Sửng Sốt và Đảo Ti Tốp thực tế -->
+    <section class="gallery">      
+      <div class="img-box"><img src="https://www.wyndhamhalong.com/uploads/blog/2017/Thang_1/hang-sung-sot-ha-long.jpg" alt="Hang Sửng Sốt Hạ Long"></div>         <!-- Ảnh hang Sửng Sốt -->
+      <div class="img-box"><img src="https://booking.muongthanh.com/images/news/2025/12/original/dao-ti-top_1766735461.jpg" alt="Đảo Ti Tốp tuyệt đẹp"></div>       <!-- Ảnh đảo Ti Tốp -->
+    </section>    
+
+    <div class="content-layout">      
+      <main class="main-text">        
+        <section>          
+          <h2>Giới thiệu về Vịnh Hạ Long</h2>           <!-- Tiêu đề giới thiệu -->
+          <p>Vịnh Hạ Long là một di sản thiên nhiên thế giới được UNESCO công nhận, nằm ở tỉnh Quảng Ninh. Nơi đây làm say đắm lòng người bởi hàng nghìn hòn đảo đá vôi kỳ vĩ mọc lên từ làn nước xanh ngọc bích, tạo nên một bức tranh thủy mặc khổng lồ tuyệt đẹp mà thiên nhiên đã ban tặng cho đất nước Việt Nam.</p>         <!-- Nội dung đoạn giới thiệu -->
+        </section>        
+        <section>          
+          <h2>Trải nghiệm không thể bỏ qua</h2>           <!-- Tiêu đề trải nghiệm -->
+          <ul>            
+            <li><b>Ngủ đêm trên du thuyền:</b> Tận hưởng kỳ nghỉ sang trọng giữa lòng di sản, ngắm hoàng hôn và bình minh tuyệt mỹ trên biển.</li>             <!-- Mục 1 -->
+            <li><b>Chèo thuyền Kayak:</b> Tự tay chèo thuyền len lỏi qua các hang động xuyên thủy để khám phá vẻ đẹp nguyên sơ của Đảo Ti Tốp, Hang Sửng Sốt.</li>             <!-- Mục 2 -->
+            <li><b>Ngắm vịnh từ thủy phi cơ:</b> Trải nghiệm bay trên cao để thu trọn vào tầm mắt sự kỳ vĩ, bao la tuyệt đối của hàng ngàn hòn đảo đá vôi độc đáo.</li>             <!-- Mục 3 -->
+          </ul>        
+        </section>      
+      </main>      
+      <aside class="sidebar">        
+        <div class="widget">          
+          <h3>Thông tin hữu ích</h3>           <!-- Tiêu đề cột phụ -->
+          <ul class="info-list">            
+            <li>⏰ <b>Mùa đẹp nhất</b>Từ tháng 4 đến tháng 10 hàng năm. Thời tiết lúc này nắng đẹp trời trong, nước biển xanh ngắt cực kì thích hợp cho các hoạt động vui chơi, tắm biển và chèo thuyền ngoài trời.</li>             <!-- Thông tin mùa -->
+            <li>🍲 <b>Ẩm thực đặc sắc</b>Chả mực giã tay Hạ Long nức tiếng ngon ngọt, bún bề bề đậm đà biển cả, sá sùng khô và bánh cuốn chả mực nóng hổi ngon miệng.</li>           <!-- Thông tin ẩm thực -->
+          </ul>          
+        </div>       
+      </aside>    
+    </div>  
+  </div>  
+  <footer>© 2026 Du Lịch Việt Nam | Website giới thiệu du lịch ba miền</footer> <!-- Chân trang -->
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi"> <!-- Khai báo tài liệu HTML5 với ngôn ngữ tiếng Việt -->
+<head>  
+  <meta charset="UTF-8" /> <!-- Thiết lập bảng mã ký tự UTF-8 hỗ trợ tiếng Việt -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Thiết lập hiển thị tương thích trên thiết bị di động -->
+  <title>Hà Nội - Du Lịch Việt Nam</title> <!-- Tiêu đề trang hiển thị trên tab trình duyệt -->
+  <style>    
+    /* RESET CSS: Loại bỏ khoảng cách mặc định của trình duyệt */
+    * { margin: 0; padding: 0; box-sizing: border-box; }    
+    /* Thiết lập font chữ, màu nền và khoảng cách dòng cho toàn trang */
+    body { font-family: 'Segoe UI', sans-serif; color: #222; background-color: #fcfcfc; line-height: 1.6; }    
+    /* THANH ĐIỀU HƯỚNG (NAV): Thiết kế cố định trên đầu trang với hiệu ứng chuyển động */
+    nav { background: #0077b6; display: flex; justify-content: center; gap: 15px; padding: 14px; flex-wrap: wrap; position: sticky; top: 0; z-index: 1000; }    
+    nav a { color: white; text-decoration: none; padding: 8px 20px; border-radius: 20px; font-weight: 600; transition: all 0.2s; }    
+    nav a:hover, nav a.active { background: #005f8e; }    
+    /* CẤU TRÚC CHÍNH: Giới hạn chiều rộng nội dung và căn giữa */
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }    
+    .breadcrumb { font-size: 0.9rem; color: #666; margin-bottom: 15px; }    
+    .breadcrumb a { color: #0077b6; text-decoration: none; }    
+    /* ĐẦU TRANG ĐỊA ĐIỂM: Tiêu đề và các thẻ thông tin phụ (rating, badge) */
+    .place-header { margin-bottom: 25px; }    
+    .place-header h1 { font-size: 2.5rem; color: #111; margin-bottom: 8px; }    
+    .place-meta { display: flex; gap: 15px; align-items: center; color: #555; flex-wrap: wrap; }    
+    .rating { color: #ff9800; font-weight: bold; }    
+    .badge { background: #e0f2fe; color: #0369a1; padding: 3px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }    
+    /* THƯ VIỆN ẢNH: Sử dụng CSS Grid để bố cục ảnh (1 ảnh lớn, 2 ảnh nhỏ) */
+    .gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 35px; border-radius: 12px; overflow: hidden; }    
+    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; display: block; }    
+    .gallery img:hover { transform: scale(1.02); }    
+    .main-img { height: 420px; }    
+    .sub-imgs { display: grid; grid-template-rows: 1fr 1fr; gap: 12px; height: 420px; }    
+    /* BỐ CỤC NỘI DUNG: Chia trang thành 2 cột (Main và Sidebar) */
+    .content-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 35px; }    
+    .main-text section { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }    
+    .main-text h2 { color: #0077b6; font-size: 1.4rem; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }    
+    .main-text p { color: #444; margin-bottom: 15px; text-align: justify; }    
+    .main-text ul { margin-left: 20px; margin-bottom: 15px; color: #444; }    
+    .main-text li { margin-bottom: 8px; }    
+    /* SIDEBAR: Chứa các widget thông tin bổ sung */
+    .sidebar { display: flex; flex-direction: column; gap: 25px; }    
+    .widget { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }    
+    .widget h3 { font-size: 1.2rem; color: #333; margin-bottom: 15px; }    
+    .info-list { list-style: none; }    
+    .info-list li { margin-bottom: 12px; font-size: 0.95rem; color: #444; }    
+    .btn-map { display: block; text-align: center; background: #0077b6; color: white; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 600; margin-top: 15px; transition: background 0.2s; }    
+    .btn-map:hover { background: #005f8e; }    
+    
+    /* BẢN ĐỒ NHÚNG: Thiết kế khung chứa iframe hiển thị bản đồ */
+    .map-container { width: 100%; height: 250px; border-radius: 8px; overflow: hidden; margin-top: 5px; }
+    .map-container iframe { width: 100%; height: 100%; border: 0; }
+
+    /* CHÂN TRANG: Chứa thông tin bản quyền */
+    footer { background: #222; color: #ccc; text-align: center; padding: 25px; font-size: 0.9rem; margin-top: 60px; }    
+    /* RESPONSIVE: Điều chỉnh bố cục khi màn hình nhỏ hơn 900px */
+    @media (max-width: 900px) { .gallery, .content-layout { grid-template-columns: 1fr; } .sub-imgs { display: none; } .main-img { height: 300px; } }  
+  </style>
+</head>
+<body>  
+  <!-- Thanh điều hướng chính -->
+  <nav>    
+    <a href="index.html">Trang chủ</a>    
+    <a href="where.html" class="active">Địa điểm</a>    
+    <a href="amthuc.html">Ẩm thực</a>    
+    <a href="vanhoa.html">Văn hóa</a>  
+  </nav>  
+  
+  <div class="container">    
+    <!-- Đường dẫn điều hướng (Breadcrumb) -->
+    <div class="breadcrumb"><a href="index.html">Trang chủ</a> &gt; <a href="where.html">Địa điểm</a> &gt; <span>Hà Nội</span></div>    
+    
+    <!-- Tiêu đề và meta data của bài viết -->
+    <header class="place-header">      
+      <h1>Khám Phá Hà Nội</h1>      
+      <div class="place-meta">        
+        <span class="rating">⭐ 4.8 (2,410 đánh giá)</span>        
+        <span class="badge">Thủ đô văn hiến</span>        
+        <span>📍 Hà Nội, Việt Nam</span>      
+      </div>    
+    </header>    
+    
+    <!-- Thư viện ảnh -->
+    <section class="gallery">      
+      <div class="main-img"><img src="https://eggyolk.vn/wp-content/uploads/2024/08/Nhung-dia-diem-tham-quan-mien-phi-o-ha-noi.jpg" alt="Hồ Gươm"></div>      
+      <div class="sub-imgs">        
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400" alt="Phố cổ">        
+        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400" alt="Chùa Một Cột">      
+      </div>    
+    </section>    
+    
+    <!-- Phần nội dung chính và sidebar -->
+    <div class="content-layout">      
+      <main class="main-text">        
+        <section>          
+          <h2>Giới thiệu về Hà Nội</h2>          
+          <p>Thủ đô Hà Nội là trái tim của Việt Nam, mang trong mình bề dày lịch sử nghìn năm văn hiến trầm mặc. Nơi đây lôi cuốn bước chân lữ khách bởi vẻ đẹp cổ kính mộc mạc của 36 phố phường, những công trình kiến trúc Pháp cổ kính xen lẫn những tán cây xanh mát bên Hồ Hoàn Kiếm.</p>        
+        </section>        
+        <section>          
+          <h2>Trải nghiệm không thể bỏ qua</h2>          
+          <ul>            
+            <li><b>Dạo quanh Phố Cổ:</b> Khám phá những con phố nghề xưa cũ bằng xe xích lô hoặc đi bộ len lỏi ngắm các nếp nhà cổ.</li>            
+            <li><b>Đón bình minh Hồ Gươm:</b> Cảm nhận không khí trong lành lung linh và ghé thăm cầu Thê Húc, Đền Ngọc Sơn.</li>            
+            <li><b>Thưởng thức Cà phê trứng:</b> Thử hương vị cà phê độc đáo, béo ngậy mang đậm nét văn hóa Hà thành tại phố Nguyễn Hữu Huân.</li>          
+          </ul>        
+        </section>      
+      </main>      
+      
+      <aside class="sidebar">        
+        <div class="widget">          
+          <h3>Thông tin hữu ích</h3>          
+          <ul class="info-list">            
+            <li>⏰ <b>Mùa đẹp nhất:</b> Mùa thu (Tháng 9 - tháng 11) với không khí se lạnh, hương hoa sữa thơm nồng.</li>            
+            <li>🍲 <b>Ẩm thực đặc sắc:</b> Phở bò, bún chả Obama, chả cá Lã Vọng, cốm làng Vòng.</li>          
+          </ul>                    
+        </div>         
+         <!-- Đoạn code dưới đây đang bị thiếu thẻ mở iframe -->
+         </iframe>
+        </div>
+      </div>
+    </aside>    
+  </div>  
+</div>  
+  
+<!-- Chân trang -->
+<footer>© 2026 Du Lịch Việt Nam | Website giới thiệu du lịch ba miền</footer>
+</body>
+</html>

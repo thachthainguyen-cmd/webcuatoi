@@ -1,0 +1,205 @@
+<!DOCTYPE html> <!-- Dòng 1: Khai báo tài liệu chuẩn HTML5 -->
+<!-- Khai báo tài liệu HTML5 -->
+<html lang="vi"> <!-- Dòng 3: Thiết lập ngôn ngữ trang web là tiếng Việt -->
+<head> <!-- Dòng 4: Mở phần cấu hình trang web -->
+  <meta charset="UTF-8" /> <!-- Dòng 5: Sử dụng bảng mã UTF-8 để hiển thị đúng tiếng Việt -->
+  <!-- Đảm bảo hiển thị tốt trên các thiết bị di động (Responsive) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Dòng 7: Cấu hình khung nhìn cho các thiết bị -->
+  <title>Văn Hóa - Du Lịch Việt Nam</title> <!-- Dòng 8: Tiêu đề hiển thị trên thanh tab trình duyệt -->
+  <style> <!-- Dòng 9: Mở khối định dạng CSS -->
+    /* Reset CSS: Loại bỏ khoảng cách mặc định của trình duyệt cho tất cả phần tử */
+    * { margin: 0; padding: 0; box-sizing: border-box; } /* Dòng 11: Thiết lập margin, padding về 0 và border-box để tính toán kích thước chuẩn */
+    body { font-family: 'Segoe UI', sans-serif; color: #222; background-color: #fcfcfc; } /* Dòng 12: Thiết lập font, màu chữ và nền trang */
+
+    /* HEADER: Cấu hình phần ảnh bìa và tiêu đề trang */
+    header { /* Dòng 15: Định dạng phần đầu trang */
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* Dòng 16: Lớp phủ tối lên ảnh */
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat; /* Dòng 17: Ảnh nền */
+      color: white; text-align: center; padding: 80px 20px; /* Dòng 18: Màu chữ và khoảng cách */
+    }
+    header h1 { font-size: 3rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; } /* Dòng 20: Định dạng tiêu đề h1 */
+    header p { font-size: 1.2rem; opacity: 0.9; } /* Dòng 21: Định dạng đoạn văn mô tả */
+
+    /* NAVIGATION: Thanh menu điều hướng, dùng sticky để bám dính khi cuộn */
+    nav { /* Dòng 24: Định dạng thanh menu */
+      background: #0077b6; display: flex; justify-content: center; /* Dòng 25: Căn giữa menu bằng Flexbox */
+      gap: 15px; padding: 14px; flex-wrap: wrap; /* Dòng 26: Khoảng cách và tự động xuống dòng */
+      position: sticky; top: 0; z-index: 1000; /* Dòng 27: Ghim menu ở trên cùng khi cuộn trang */
+    }
+    nav a { /* Dòng 29: Định dạng các nút liên kết */
+      color: white; text-decoration: none; padding: 8px 20px; /* Dòng 30: Màu chữ và khoảng đệm */
+      border-radius: 20px; font-weight: 600; transition: all 0.2s; /* Dòng 31: Bo góc và hiệu ứng chuyển đổi */
+    }
+    nav a:hover, nav a.active { background: #005f8e; } /* Dòng 33: Hiệu ứng khi di chuột qua */
+
+    /* INTRO: Phần đoạn văn giới thiệu mục đích trang web */
+    .intro { text-align: center; padding: 50px 20px 30px; } /* Dòng 36: Khoảng cách phần giới thiệu */
+    .intro h2 { font-size: 1.8rem; color: #0077b6; margin-bottom: 20px; } /* Dòng 37: Định dạng tiêu đề h2 */
+    .intro p { color: #555; max-width: 700px; margin-inline: auto; font-size: 1rem; line-height: 1.5; } /* Dòng 38: Định dạng đoạn văn giới thiệu */
+
+    /* MIEN SECTION: Khối chứa thông tin từng miền, dùng màu sắc khác nhau để phân biệt */
+    .mien-section { padding: 40px 10%; } /* Dòng 41: Lề cho các khối miền */
+    .mien-section h2.section-title { /* Dòng 42: Định dạng tiêu đề các miền */
+      font-size: 1.4rem; color: white; padding: 10px 24px;
+      border-radius: 30px; display: inline-block; margin-bottom: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    /* Màu sắc đặc trưng cho tiêu đề từng miền */
+    .mien-bac h2.section-title  { background: #c0392b; } /* Dòng 49: Màu đỏ miền Bắc */
+    .mien-trung h2.section-title { background: #d35400; } /* Dòng 50: Màu cam miền Trung */
+    .mien-nam h2.section-title  { background: #27ae60; } /* Dòng 51: Màu xanh miền Nam */
+
+    /* CARD GRID: Lưới hiển thị các thẻ nội dung theo cột */
+    .card-grid { /* Dòng 54: Định dạng lưới */
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); /* Dòng 56: Chia làm 3 cột bằng nhau */
+      gap: 25px;
+    }
+    /* CARD: Thẻ chứa ảnh và thông tin chi tiết của từng địa danh/văn hóa */
+    .card { /* Dòng 60: Định dạng khung thẻ bài viết */
+      background: white;
+      border-radius: 12px; overflow: hidden; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); } /* Dòng 69: Hiệu ứng nổi */
+    .card img { width: 100%; height: 180px; object-fit: cover; display: block; } /* Dòng 70: Kích thước ảnh */
+    
+    .card-body { /* Dòng 72: Phần nội dung thẻ */
+      padding: 18px; 
+      display: flex; 
+      flex-direction: column; 
+      flex-grow: 1;
+    }
+    .card-body h3 { font-size: 1.15rem; margin-bottom: 8px; color: #333; } /* Dòng 77: Tiêu đề thẻ */
+    .card-body p { font-size: 0.9rem; color: #666; line-height: 1.5; flex-grow: 1; padding-bottom: 8px; } /* Dòng 78: Đoạn văn thẻ */
+
+    /* FOOTER: Chân trang chứa thông tin bản quyền và link liên hệ */
+    footer { /* Dòng 81: Định dạng chân trang */
+      background: #222; color: #ccc; text-align: center;
+      padding: 25px; font-size: 0.9rem; margin-top: 60px;
+    }
+
+    /* RESPONSIVE: Điều chỉnh giao diện theo kích thước màn hình */
+    @media (max-width: 900px) { /* Dòng 88: Màn hình nhỏ hơn 900px */
+      .card-grid { grid-template-columns: repeat(2, 1fr); } /* Chuyển thành 2 cột */
+      .mien-section { padding: 30px 5%; }
+    }
+    @media (max-width: 600px) { /* Dòng 92: Màn hình nhỏ hơn 600px */
+      .card-grid { grid-template-columns: 1fr; } /* Chuyển thành 1 cột */
+      header h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER: Phần đầu trang hiển thị tên website và slogan -->
+<header>
+  <h1>Khám Phá Việt Nam</h1>
+  <p>Thiên đường du lịch với biển, đảo và phố cổ tuyệt đẹp</p>
+</header>
+
+<!-- NAVIGATION: Menu chính để điều hướng giữa các trang -->
+<nav>
+  <a href="index.html">Trang chủ</a>
+  <a href="where.html">Địa điểm</a>
+  <a href="food.html">Ẩm thực</a>
+  <a href="vanhoa.html" class="active">Văn hóa</a>
+</nav>
+
+<!-- INTRO: Phần mô tả khái quát về chủ đề văn hóa -->
+<div class="intro">
+  <h2>Chào mừng bạn đến với chuyên mục văn hóa</h2>
+  <p>Khám phá kho tàng di sản văn hóa phi vật thể, nghệ thuật truyền thống lâu đời và các lễ hội đặc sắc mang đậm dấu ấn bản sắc của con người từng vùng miền.</p>
+</div>
+
+<!-- MIỀN BẮC: Khối hiển thị thông tin văn hóa Miền Bắc -->
+<div class="mien-section mien-bac">
+  <h2 class="section-title">🔴 Miền Bắc</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="https://img.baobacninhtv.vn/Medias/565/2025/10/03/09.jpg" alt="Dân ca Quan họ">
+      <div class="card-body">
+        <h3>Dân ca Quan họ</h3>
+        <p>Lối hát giao duyên đằm thắm, tinh tế của liền anh, liền chị mang đậm nét văn hóa Kinh Bắc.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzerG_UKLTPo1om-0MwvX55ToMlDRP_XCA_wUXy6j_CSb63NBYO63nCVIw&s=10" alt="Múa rối nước">
+      <div class="card-body">
+        <h3>Múa Rối Nước</h3>
+        <p>Loại hình nghệ thuật sân khấu dân gian độc đáo ra đời từ nền văn minh lúa nước đồng bằng sông Hồng.</p>
+      </div>    
+    </div>
+    <div class="card">
+      <img src="https://suckhoedoisong.qltns.mediacdn.vn/Images/duylinh/2018/04/20/Lo_hoa_bat_trang.jpg" alt="Làng nghề gốm">
+      <div class="card-body">
+        <h3>Gốm sứ Bát Tràng</h3>
+        <p>Làng nghề truyền thống lâu đời giữ lửa tinh hoa gốm vuốt tay thủ công mỹ nghệ đầy tinh xảo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MIỀN TRUNG: Khối hiển thị thông tin văn hóa Miền Trung -->
+<div class="mien-section mien-trung" style="background:#fcf5f0">
+  <h2 class="section-title">🟠 Miền Trung</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzTHdt8ZCymGqbL_oLEMCRkPmlg_L7cchvT0ZaZ-V0U9_uqAxVpWOiF3Ym&s=10" alt="Nhã nhạc cung đình">
+      <div class="card-body">
+        <h3>Nhã nhạc cung đình</h3>
+        <p>Di sản phi vật thể thế giới, biểu tượng âm nhạc bác học đỉnh cao vương triều phong kiến Huế xưa.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFxab_nBKEb45_LT3DYraICvE04gnkHUzzVCTHLfpv9gtmOYVjirBbWtE&s=10" alt="Lễ hội đèn lồng">
+      <div class="card-body">
+        <h3>Lễ hội đèn lồng</h3>
+        <p>Nét sinh hoạt văn hóa lung linh huyền ảo của phố cổ Hội An vào mỗi đêm rằm hàng tháng.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM4ewFnKFqTgruXp1nHWb18xY5dFt-k9YQI8tfuhK_63RG8Lt3nrgtU6o&s=10" alt="Không gian cồng chiêng">
+      <div class="card-body">
+        <h3>Văn hóa Cồng Chiêng</h3>
+        <p>Âm vang đại ngàn Tây Nguyên, sợi dây tâm linh kết nối con người với thần linh qua các lễ hội.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MIỀN NAM: Khối hiển thị thông tin văn hóa Miền Nam -->
+<div class="mien-section mien-nam">
+  <h2 class="section-title">🟢 Miền Nam</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROVOIci7rXpK_XyHUltZALiXw0s8NoRGFpt8Yt0usqDqYNS0i1ZisgOw4&s=10" alt="Đờn ca tài tử">
+      <div class="card-body">
+        <h3>Đờn ca tài tử</h3>
+        <p>Dòng nhạc dân gian mộc mạc, phóng khoáng gắn liền với tâm hồn và nếp sống sông nước Nam Bộ.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://vietourist.com.vn/public/frontend/uploads/kceditor/images/cho-noi-mien-tay2.jpg" alt="Chợ nổi miền Tây">
+      <div class="card-body">
+        <h3>Chợ nổi miền tây</h3>
+        <p>Chợ nổi miền Tây là nét văn hóa giao thương sông nước độc đáo với ghe xuồng tấp nập mua bán nông sản.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://file3.qdnd.vn/data/images/0/2024/12/07/upload_2049/via-ba.jpg?dpi=150&quality=100&w=870" alt="Lễ hội bà chúa xứ">
+      <div class="card-body">
+        <h3>Lễ hội Bà Chúa Xứ</h3>
+        <p>Lễ hội tâm linh lớn nhất Nam Bộ mang đậm tín ngưỡng bản địa thờ mẫu của người dân phương Nam.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER: Phần cuối trang -->
+<footer>© 2026 Du Lịch Việt Nam | Website giới thiệu văn hóa ba miền</footer>
+</body>
+</html>

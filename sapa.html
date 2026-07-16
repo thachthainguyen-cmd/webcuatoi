@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi"> <!-- Khai báo trang web sử dụng tiếng Việt -->
+<head>  
+  <meta charset="UTF-8" /> <!-- Định dạng bộ mã ký tự UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Tối ưu hiển thị trên di động -->
+  <title>Sapa - Du Lịch Việt Nam</title> <!-- Tiêu đề trang trên trình duyệt -->
+  
+  <style>    
+    /* RESET CSS: Loại bỏ lề và đệm mặc định để đồng bộ giao diện */
+    * { margin: 0; padding: 0; box-sizing: border-box; }    
+    
+    /* BODY: Định dạng phông chữ, màu nền và khoảng cách dòng cho toàn trang */
+    body { font-family: 'Segoe UI', sans-serif; color: #222; background-color: #fcfcfc; line-height: 1.6; }    
+    
+    /* NAVIGATION: Thanh menu điều hướng cố định trên đầu trang */
+    nav { background: #0077b6; display: flex; justify-content: center; gap: 15px; padding: 14px; flex-wrap: wrap; position: sticky; top: 0; z-index: 1000; }    
+    nav a { color: white; text-decoration: none; padding: 8px 20px; border-radius: 20px; font-weight: 600; transition: all 0.2s; }    
+    nav a:hover, nav a.active { background: #005f8e; }    
+    
+    /* CONTAINER: Định dạng vùng chứa chính giới hạn chiều rộng 1100px */
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }    
+    
+    /* BREADCRUMB: Đường dẫn phân cấp cho người dùng */
+    .breadcrumb { font-size: 0.9rem; color: #666; margin-bottom: 15px; }    
+    .breadcrumb a { color: #0077b6; text-decoration: none; }    
+    
+    /* PLACE HEADER: Khu vực tiêu đề tên địa điểm và các thông tin phụ (rating, tag) */
+    .place-header { margin-bottom: 25px; }    
+    .place-header h1 { font-size: 2.5rem; color: #111; margin-bottom: 8px; }    
+    .place-meta { display: flex; gap: 15px; align-items: center; color: #555; flex-wrap: wrap; }    
+    .rating { color: #ff9800; font-weight: bold; }    
+    .badge { background: #e0f2fe; color: #0369a1; padding: 3px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }    
+    
+    /* GALLERY: Bố cục lưới hiển thị ảnh (1 ảnh lớn bên trái, 2 ảnh nhỏ bên phải) */
+    .gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 35px; border-radius: 12px; overflow: hidden; }    
+    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; display: block; }    
+    .gallery img:hover { transform: scale(1.02); }    
+    .main-img { height: 420px; }    
+    .sub-imgs { display: grid; grid-template-rows: 1fr 1fr; gap: 12px; height: 420px; }    
+    
+    /* CONTENT LAYOUT: Chia trang thành 2 cột: phần nội dung bài viết và sidebar bên phải */
+    .content-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 35px; }    
+    .main-text section { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }    
+    .main-text h2 { color: #0077b6; font-size: 1.4rem; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }    
+    .main-text p { color: #444; margin-bottom: 15px; text-align: justify; }    
+    .main-text ul { margin-left: 20px; margin-bottom: 15px; color: #444; }    
+    .main-text li { margin-bottom: 8px; }    
+    
+    /* SIDEBAR: Khu vực chứa các tiện ích thông tin phụ */
+    .sidebar { display: flex; flex-direction: column; gap: 25px; }    
+    .widget { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }    
+    .widget h3 { font-size: 1.2rem; color: #333; margin-bottom: 15px; }    
+    .info-list { list-style: none; }    
+    .info-list li { margin-bottom: 12px; font-size: 0.95rem; color: #444; }    
+    
+    /* MAP CONTAINER: Cấu hình cho khung bản đồ nhúng */
+    .map-container { width: 100%; height: 250px; border-radius: 8px; overflow: hidden; margin-top: 5px; }
+    .map-container iframe { width: 100%; height: 100%; border: 0; }
+
+    /* FOOTER: Khu vực chân trang */
+    footer { background: #222; color: #ccc; text-align: center; padding: 25px; font-size: 0.9rem; margin-top: 60px; }    
+    
+    /* RESPONSIVE: Thay đổi hiển thị khi màn hình điện thoại (<= 900px) */
+    @media (max-width: 900px) { .gallery, .content-layout { grid-template-columns: 1fr; } .sub-imgs { display: none; } .main-img { height: 300px; } }  
+  </style>
+</head>
+
+<body>  
+  <!-- NAV: Điều hướng menu trang web -->
+  <nav>    
+    <a href="index.html">Trang chủ</a>    
+    <a href="where.html" class="active">Địa điểm</a>    
+    <a href="amthuc.html">Ẩm thực</a>    
+    <a href="vanhoa.html">Văn hóa</a>  
+  </nav>  
+
+  <div class="container">    
+    <!-- BREADCRUMB: Hiển thị vị trí người dùng trong website -->
+    <div class="breadcrumb"><a href="index.html">Trang chủ</a> &gt; <a href="where.html">Địa điểm</a> &gt; <span>Sapa</span></div>    
+    
+    <!-- HEADER: Tên địa điểm và thông tin tóm tắt -->
+    <header class="place-header">      
+      <h1>Khám Phá Sapa</h1>      
+      <div class="place-meta">        
+        <span class="rating">⭐ 4.7 (3,150 đánh giá)</span>        
+        <span class="badge">Thị xã trong sương</span>        
+        <span>📍 Lào Cai, Việt Nam</span>      
+      </div>    
+    </header>    
+    
+    <!-- GALLERY: Hiển thị hình ảnh giới thiệu Sapa -->
+    <section class="gallery">      
+      <div class="main-img"><img src="https://sun-ecommerce-cdn.azureedge.net/ecommerce/service-sites/asset/SunWorldFansipan/swold/ruong-bac-thang-sa-pahtml/ruong-bac-thang-sa-pa-duoc-vinh-du-cong-nhan-danh-lam-thang-canh.jpg" alt="Ruộng bậc thang Sapa vàng óng"></div>      
+      <div class="sub-imgs">        
+        <img src="https://ik.imagekit.io/tvlk/blog/2024/11/t0OyiydT-Untitled-design-1.png" alt="Đỉnh Fansipan hùng vĩ">        
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtITQJZzTOXLbM6xxn_qRUetPg-j95cY3-4668miSoj7h81cJ8jsshXGOX&s=10" alt="Bản làng Sapa mờ sương">        
+      </div>    
+    </section>    
+    
+    <!-- CONTENT: Nội dung chi tiết về Sapa và Sidebar thông tin hữu ích -->
+    <div class="content-layout">      
+      <main class="main-text">        
+        <!-- Section: Giới thiệu chung -->
+        <section>          
+          <h2>Giới thiệu về Sapa</h2>          
+          <p>Thị xã Sa Pa nằm ở độ cao trung bình từ 1.500m đến 1.800m so với mực nước biển thuộc tỉnh Lào Cai, vùng Tây Bắc Việt Nam. Nơi đây ẩn chứa bao điều kỳ diệu của cảnh sắc thiên nhiên với những dãy núi trùng điệp chìm trong làn sương mù mờ ảo, những thung lũng ruộng bậc thang uốn lượn tuyệt đẹp và nét văn hóa đa dạng, đặc sắc của các đồng bào dân tộc thiểu số vùng cao.</p>        
+        </section>        
+        <!-- Section: Các hoạt động trải nghiệm -->
+        <section>          
+          <h2>Trải nghiệm không thể bỏ qua</h2>          
+          <ul>            
+            <li><b>Chinh phục đỉnh Fansipan:</b> Đi tuyến cáp treo hiện đại hoặc trekking xuyên rừng hoàng liên sơn để đứng trên "Nóc nhà Đông Dương" ở độ cao 3.143m ngắm biển mây ngút ngàn.</li>            
+            <li><b>Trekking qua các bản làng:</b> Đi bộ len lỏi qua Bản Cát Cát, Tả Van hay Ý Linh Hồ để tìm hiểu cuộc sống bình dị mộc mạc và ngắm nhìn thung lũng Mường Hoa thơ mộng.</li>            
+            <li><b>Khám phá chợ đêm và Nhà thờ Đá:</b> Trải nghiệm không khí se lạnh, hòa mình vào các điệu múa khèn của người bản địa và chụp ảnh check-in kiến trúc cổ kính vùng cao.</li>          
+          </ul>        
+        </section>      
+      </main>      
+      
+      <!-- SIDEBAR: Thông tin hữu ích -->
+      <aside class="sidebar">        
+        <div class="widget">          
+          <h3>Thông tin hữu ích</h3>          
+          <ul class="info-list">            
+            <li>⏰ <b>Mùa đẹp nhất:</b> Tháng 8 - tháng 9 (mùa ruộng bậc thang chín vàng rực rỡ) hoặc Tháng 12 - tháng 2 (mùa săn tuyết rơi, hoa đào hoa mận nở rộ).</li>            
+            <li>🍲 <b>Ẩm thực đặc sắc:</b> Lẩu cá hồi cá tầm, gà đen nướng mật ong rừng, lợn cắp nách, thịt trâu gác bếp và thắng cố.</li>          
+          </ul>          
+        </div> 
+      </aside>    
+    </div>  
+  </div>  
+  
+  <!-- FOOTER: Chân trang bản quyền -->
+  <footer>© 2026 Du Lịch Việt Nam | Website giới thiệu du lịch ba miền</footer>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html> <!-- Khai báo kiểu tài liệu HTML5 -->
+<html lang="vi"> <!-- Thiết lập ngôn ngữ trang là tiếng Việt -->
+<head> <!-- Mở phần đầu trang -->
+  <meta charset="UTF-8"/> <!-- Thiết lập mã hóa ký tự UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Tối ưu hiển thị cho thiết bị di động -->
+  <title>Ẩm Thực - Du Lịch Việt Nam</title> <!-- Tiêu đề trang trên trình duyệt -->
+  <style> <!-- Bắt đầu khối định dạng CSS -->
+    * { margin:0; padding:0; box-sizing:border-box; } /* Reset khoảng cách mặc định của trình duyệt */
+    body { font-family:'Segoe UI',sans-serif; color:#222; } /* Thiết lập font chữ và màu sắc mặc định */
+
+    header { /* Định dạng khối tiêu đề đầu trang */
+      background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), /* Tạo lớp phủ tối trên ảnh nền */
+        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400') center/cover; /* Ảnh nền header */
+      color:white; text-align:center; padding:70px 20px; /* Định dạng màu, căn giữa và khoảng cách */
+    }
+    header h1 { font-size:2.5rem; text-transform:uppercase; } /* Định dạng tiêu đề h1 */
+    header p { margin-top:8px; opacity:0.9; } /* Định dạng đoạn văn mô tả */
+
+    nav { background:#0077b6; display:flex; justify-content:center; gap:10px; padding:12px; flex-wrap:wrap; } /* Định dạng thanh điều hướng */
+    nav a { color:white; text-decoration:none; padding:7px 16px; border-radius:20px; font-weight:600; } /* Định dạng link điều hướng */
+    nav a:hover, nav a.active { background:#005f8e; } /* Hiệu ứng hover và trạng thái active */
+
+    .content { max-width:1100px; margin:40px auto; padding:0 20px; } /* Khung chứa nội dung chính căn giữa */
+
+    .mien-title { /* Định dạng tiêu đề từng miền */
+      font-size:1.4rem; color:white; padding:10px 20px;
+      border-radius:8px; display:inline-block; margin:30px 0 16px;
+    }
+    .bac   { background:#c0392b; } /* Màu nền cho tiêu đề miền Bắc */
+    .trung { background:#d35400; } /* Màu nền cho tiêu đề miền Trung */
+    .nam   { background:#27ae60; } /* Màu nền cho tiêu đề miền Nam */
+
+    .card-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; } /* Lưới hiển thị các thẻ món ăn */
+
+    .card { border-radius:10px; overflow:hidden; box-shadow:0 3px 12px rgba(0,0,0,0.1); transition:transform 0.2s; background:white; } /* Định dạng thẻ món ăn */
+    .card:hover { transform:translateY(-4px); } /* Hiệu ứng khi rê chuột vào thẻ */
+    .card img { width:100%; height:200px; object-fit:cover; display:block; } /* Định dạng hình ảnh trong thẻ */
+    .card-body { padding:14px; } /* Khung nội dung trong thẻ */
+    .card-body h3 { font-size:1rem; margin-bottom:6px; color:#333; } /* Tiêu đề món ăn */
+    .card-body p { font-size:0.83rem; color:#666; line-height:1.5; } /* Mô tả món ăn */
+    .tag { /* Định dạng nhãn (tag) cho món ăn */
+      display:inline-block; font-size:0.72rem; padding:3px 10px;
+      border-radius:20px; color:white; margin-bottom:8px;
+    }
+
+    .back-link { display:inline-block; margin:30px 0; color:#0077b6; font-weight:bold; text-decoration:none; } /* Link quay về */
+    footer { background:#0077b6; color:white; text-align:center; padding:16px; margin-top:40px; } /* Chân trang */
+
+    @media(max-width:768px) { .card-grid { grid-template-columns:1fr; } } /* Tối ưu cho thiết bị di động (1 cột) */
+  </style>
+</head>
+<body>
+
+<header> <!-- Mở phần Header -->
+  <h1>🍜 Ẩm Thực Việt Nam</h1>
+  <p>Hành trình khám phá hương vị đặc sắc từ Bắc chí Nam</p>
+</header>
+
+<nav> <!-- Mở thanh điều hướng -->
+  <a href="index.html"class="active">Trang chủ</a>
+  <a href="where.html"class="active">Địa điểm</a>
+  <a href="food.html"class="active">Ẩm thực</a>
+  <a href="vanhoa.html"class="active">Văn hóa</a>
+</nav>
+
+<div class="content"> <!-- Mở khối nội dung chính -->
+
+  <!-- MIỀN BẮC -->
+  <h2 class="mien-title bac">🔴 Ẩm Thực Miền Bắc</h2>
+  <div class="card-grid">
+
+    <div class="card"> <!-- Món Phở -->
+<img src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1714043751/xcmv6ine1oq4md0zdmnx.webp" alt="Phở Hà Nội">
+      <div class="card-body">
+        <span class="tag" style="background:#c0392b">Đặc sản Hà Nội</span>
+        <h3>Phở Hà Nội</h3>
+<p>Bát phở truyền thống với nước dùng trong, ngọt từ xương bò hầm nhiều giờ, thơm mùi hồi quế đặc trưng.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Bún Chả -->
+      <img src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1714043737/wsxubuwbqb1je8w1anan.webp" alt="Bún Chả">
+      <div class="card-body">
+        <span class="tag" style="background:#c0392b">Đặc sản</span>
+        <h3>Bún Chả Hà Nội</h3>
+        <p>Chả nướng thơm lừng chấm nước mắm chua ngọt, ăn cùng bún tươi và rau sống. Món ăn nổi tiếng thế giới.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Bánh đa cua -->
+      <img src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1596029294/blog/cyu9an476aezi7topycd.webp" alt="Bánh đa cua">
+      <div class="card-body">
+        <span class="tag" style="background:#c0392b">Đặc sản Hà Nội</span>
+        <h3>Bánh đa cua</h3>
+        <p> Sợi bánh đa dai dai ăn cùng nước dùng đậm vị, thêm chút giấm chua thanh thanh và ớt cay nồng là đúng chuẩn</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Phở Cuốn -->
+      <img src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1611204023/blog/mfx04dfqytdfoukqoixv.webp" alt="Phở Cuốn">
+      <div class="card-body">
+        <span class="tag" style="background:#c0392b">Lúc nào ăn cũng được</span>
+        <h3>Phở Cuốn</h3>
+        <p>Những lát bánh phở mềm mại cuộn thịt bò xào, rau sống, chút giá đỗ và dưa góp, chấm cùng nước mắm pha tỏi ớt chua ngọt – vậy là đủ cho một buổi xế no bụng mà vẫn nhẹ nhàng, thanh mát.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Bún Đậu -->
+      <img src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1611205387/blog/keqqriwsenezsykmndq6.webp" alt=" Bún Đậu Mắm Tôm">
+      <div class="card-body">
+        <span class="tag" style="background:#c0392b">Lúc nào ăn cũng được</span>
+        <h3>Bún Đậu Mắm Tôm</h3>
+        <p> Chỉ cần một mẹt nhỏ với bún rối, đậu rán vàng giòn, vài miếng chả cốm hoặc thịt luộc, ăn kèm với rau sống và mắm tôm pha sánh mịn là đủ gây thương nhớ.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Bánh Mì -->
+      <img src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1714043595/w7mnrktcpvhb3x5tstwu.webp" alt="Bánh Mì Hà Nội">
+<div class="card-body">
+        <span class="tag" style="background:#c0392b">Lúc nào ăn cũng được</span>
+<h3>Bánh Mì Hà Nội</h3>
+        <p>Bánh mì Hà Nội không chỉ là món ăn sáng nhanh gọn mà còn là bữa xế "cứu đói" quốc dân, vừa tiện lợi vừa ngon “quá đáng”.</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- MIỀN TRUNG -->
+  <h2 class="mien-title trung">🟠 Ẩm Thực Miền Trung</h2>
+  <div class="card-grid">
+
+    <div class="card"> <!-- Món Nem nướng -->
+      <img src="https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-ngon-mien-trung/image11.png" alt="Nem nướng Nha Trang">
+      <div class="card-body">
+        <span class="tag" style="background:#d35400">Món ăn</span>
+        <h3>Nem nướng Nha Trang</h3>
+        <p> Nem được làm từ thịt heo sạch, thêm gia vị đậm đà và nướng trên bếp than đỏ hồng. Một phần nem sẽ có đầy đủ nem nướng, bánh tráng cuốn, chả ram giòn tan ăn kèm rau sống và một bát nước chấm làm từ mắm nêm, đậu phộng giã nhuyễn. </p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Mì Quảng -->
+      <img src="https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-ngon-mien-trung/image40.png" alt="Mì Quảng">
+<div class="card-body">
+        <span class="tag" style="background:#d35400">Đặc sản Đà Nẵng</span>
+        <h3>Mì Quảng</h3>
+        <p>Tô mì Quảng đầy ắp tôm, thịt heo, thêm chút bùi béo của đậu phộng, nước lèo đậm vị, ăn cùng rau sống và bánh tráng làm tôn lên nét đặc trưng ẩm thực miền Trung.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Bún bò Huế -->
+      <img src="https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-ngon-mien-trung/image15.png" alt="Bún bò Huế">
+      <div class="card-body">
+        <span class="tag" style="background:#d35400">Đặc sản Huế</span>
+        <h3>Bún bò Huế</h3>
+        <p>Mỗi tô bún được thêm một khoanh giò heo béo ngậy cùng miếng chả Huế sần sật. Đến với Huế mộng mơ mà bỏ qua món ăn hấp dẫn này thì thật đáng tiếc. </p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Cơm Hến -->
+      <img src="https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-ngon-mien-trung/image32.png" alt="Cơm Hến">
+      <div class="card-body">
+        <span class="tag" style="background:#d35400">Đặc sản Huế</span>
+        <h3>Cơm Hến</h3>
+        <p>Cơm nguội trộn hến sông, rau sống, bánh tráng, tóp mỡ – bữa sáng bình dân mà đậm đà hương vị Huế.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Kẹo cu đơ -->
+      <img src="https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-ngon-mien-trung/image38.png" alt="Kẹo cu đơ Hà Tĩnh">
+      <div class="card-body">
+        <span class="tag" style="background:#d35400">Đặc sản Hà Tĩnh</span>
+        <h3>Kẹo cu đơ Hà Tĩnh</h3>
+        <p>Kẹo có nhiều lớp gồm bánh tráng, mạch nha, động phộng và mật mía. Khi ăn, kẹo có vị thơm nồng của gừng, giòn của bánh tráng, dai của lớp mật mía rất thú vị. </p>
+      </div>
+    </div>
+<div class="card"> <!-- Món Nem chua -->
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs6w4EdFKcnIKGYSiOFppTBh_pfgJh31fN2iJND8O_7uAWCGj7kFk1VAE&s=10" alt="Nem chua Thanh Hóa">
+      <div class="card-body">
+<span class="tag" style="background:#d35400">Đặc sản Thanh Hóa</span>
+        <h3>Nem chua Thanh Hóa</h3>
+        <p>Hỗn hợp được ủ lên men tự nhiên và bọc nhiều lớp lá chuối. Khi ăn, nem có độ giòn dai, vị chua thanh, cay nồng rất đặc trưng, thường được chấm cùng tương ớt.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MIỀN NAM -->
+  <h2 class="mien-title nam">🟢 Ẩm Thực Miền Nam</h2>
+  <div class="card-grid">
+
+    <div class="card"> <!-- Món Hủ Tiếu -->
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-M8MdWs6tnMH7QD4mSmK3IlZk7-J5vXg_o1OjTflLtg&s=10" alt="Hủ Tiếu">
+      <div class="card-body">
+        <span class="tag" style="background:#27ae60">Món nước</span>
+        <h3>Hủ Tiếu Nam Vang</h3>
+        <p>Sợi hủ tiếu dai mềm, nước dùng ngọt trong từ xương heo, tôm thịt hòa quyện – sáng nào cũng thèm.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Cơm Tấm -->
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFK75YLR1djHuZrLOPwvlHn6GRziQ47WBV89ag9T7j3RxSS6sZGbbcKrnL&s=10" alt="Cơm Tấm">
+      <div class="card-body">
+        <span class="tag" style="background:#27ae60">Đặc sản Sài Gòn</span>
+        <h3>Cơm Tấm Sài Gòn</h3>
+<p>Cơm gạo tấm dẻo thơm, sườn nướng đỏ au, bì chả, trứng ốp la – linh hồn ẩm thực Sài Gòn.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Bánh Mì -->
+      <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2024/5/31/1346983/Banh-Mi-8.jpg" alt="Bánh Mì Sài Gòn">
+      <div class="card-body">
+        <span class="tag" style="background:#27ae60">Đường phố</span>
+        <h3>Bánh Mì Sài Gòn</h3>
+        <p>Ổ bánh mì giòn to đầy ắp nhân, nước sốt đặc biệt – món ăn được CNN bình chọn ngon nhất thế giới.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Lẩu Mắm -->
+      <img src="https://mia.vn/media/uploads/blog-du-lich/top-mon-ngon-mien-nam-01-1700423578.jpeg" alt="Lẩu Mắm">
+      <div class="card-body">
+        <span class="tag" style="background:#27ae60">Lẩu</span>
+        <h3>Lẩu Mắm Miền Tây</h3>
+        <p>Nước lẩu đậm mắm cá linh, cá sặc, ăn với đủ loại rau đồng tươi ngon – đặc sản sông nước Cửu Long.</p>
+      </div>
+    </div>
+
+    <div class="card"> <!-- Món Bánh Xèo -->
+      <img src="https://sohanews.sohacdn.com/160588918557773824/2026/1/28/mon-an-1-17696122682101517281448.jpg" alt="Bánh Xèo Nam Bộ">
+      <div class="card-body">
+        <span class="tag" style="background:#27ae60">Chiên rán</span>
+        <h3>Bánh Xèo Nam Bộ</h3>
+<p>Bánh to giòn rụm, nhân tôm thịt béo ngậy, cuốn với rau rừng và chấm nước mắm ngọt đặc trưng.</p>
+      </div>
+    </div>
+<div class="card"> <!-- Món Chè Ba Màu -->
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyPiqcdM82hjaHzBJ9EgqCV6dWlvY2QX5Rb1JaWXQ63g&s=10" alt="Chè Ba Màu">
+      <div class="card-body">
+        <span class="tag" style="background:#27ae60">Tráng miệng</span>
+        <h3>Chè Ba Màu</h3>
+        <p>Đậu xanh, đậu đỏ, thạch xanh xếp lớp với nước cốt dừa béo ngậy – món tráng miệng giải nhiệt ngày hè.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <a class="back-link" href="index.html">← Quay về trang chủ</a>
+</div>
+
+<footer>© 2026 Du Lịch Việt Nam |</footer> <!-- Kết thúc footer -->
+</body>
+</html>

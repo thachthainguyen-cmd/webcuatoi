@@ -1,0 +1,156 @@
+<!DOCTYPE html> <!-- Khai báo kiểu tài liệu HTML5 -->
+<html lang="vi"> <!-- Thiết lập ngôn ngữ trang là tiếng Việt -->
+<head> <!-- Mở phần khai báo cấu trúc trang -->
+  <meta charset="UTF-8" /> <!-- Thiết lập bộ mã ký tự UTF-8 cho tiếng Việt -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Tối ưu giao diện trên di động -->
+  <title>Địa Điểm Du Lịch - Khám Phá Việt Nam</title> <!-- Tiêu đề hiển thị trên trình duyệt -->
+  <style> <!-- Bắt đầu khối CSS -->
+    * { margin: 0; padding: 0; box-sizing: border-box; } /* Reset khoảng cách mặc định của trình duyệt */
+    body { font-family: 'Segoe UI', sans-serif; color: #222; background-color: #fcfcfc; } /* Định dạng font và màu nền chung */
+
+    /* HEADER */ /* Chú thích cho phần tiêu đề */
+    header {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), /* Lớp phủ làm tối ảnh */
+        url('https://images.unsplash.com/photo-1528127269322-539801943592?w=1200') center/cover no-repeat; /* Ảnh nền header */
+      color: white; text-align: center; padding: 80px 20px; /* Căn giữa và khoảng cách chữ */
+    }
+    header h1 { font-size: 2.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; } /* Style tiêu đề lớn */
+    header p { font-size: 1.1rem; opacity: 0.9; } /* Style đoạn văn mô tả trong header */
+
+    /* NAVIGATION - Sửa lỗi active */ /* Thanh menu điều hướng */
+    nav {
+      background: #0077b6; display: flex; justify-content: center; /* Màu nền và căn giữa các menu */
+      gap: 15px; padding: 14px; flex-wrap: wrap; /* Khoảng cách và tự động xuống dòng */
+      position: sticky; top: 0; z-index: 1000; /* Cố định thanh menu khi cuộn trang */
+    }
+    nav a {
+      color: white; text-decoration: none; padding: 8px 20px; /* Màu chữ và bỏ gạch chân */
+      border-radius: 20px; font-weight: 600; transition: all 0.2s; /* Bo góc và hiệu ứng mượt */
+    }
+    nav a:hover { background: #005f8e; } /* Hiệu ứng khi di chuột vào */
+    nav a.active { background: #005f8e; } /* Style cho nút đang được chọn */
+
+    /* MAIN CONTENT */ /* Phần nội dung chính */
+    .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; } /* Giới hạn độ rộng nội dung */
+    
+    .page-title { text-align: center; color: #0077b6; margin-bottom: 15px; font-size: 2rem; } /* Tiêu đề trang */
+    
+    /* ĐOẠN CHỮ GIỚI THIỆU ĐẦU TRANG */ /* Chú thích đoạn welcome */
+    .welcome-text {
+      text-align: center; color: #555; line-height: 1.6;
+      max-width: 750px; margin: 0 auto 40px; font-size: 1.05rem;
+    }
+
+    /* MÔ TẢ NGẮN CÁC MIỀN */ /* Chú thích khung 3 miền */
+    .mien-desc {
+      background: #fff; padding: 15px; border-radius: 6px;
+      margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 0.95rem; line-height: 1.5; color: #444;
+    }
+    
+    /* TABLE ĐỊA ĐIỂM CHI TIẾT */ /* Chú thích bảng dữ liệu */
+    .location-table {
+      width: 100%; border-collapse: collapse; background: white;
+      border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      margin-bottom: 40px;
+    }
+    .location-table th { background: #0077b6; color: white; padding: 15px; text-align: left; } /* Tiêu đề bảng */
+    .location-table td { padding: 15px; border-bottom: 1px solid #eee; vertical-align: middle; } /* Ô nội dung */
+    .location-table tr:hover { background-color: #f9f9f9; } /* Hiệu ứng dòng khi di chuột */
+    
+    .thumb-img { width: 80px; height: 60px; object-fit: cover; border-radius: 4px; display: block; } /* Ảnh thumbnail */
+    .btn-view {
+      display: inline-block; background: #0077b6; color: white; padding: 6px 12px;
+      text-decoration: none; border-radius: 4px; font-size: 0.85rem; font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-view:hover { background: #005f8e; } /* Nút bấm chi tiết */
+
+    /* FOOTER */ /* Chú thích chân trang */
+    footer {
+      background: #222; color: #ccc; text-align: center;
+      padding: 25px; font-size: 0.9rem; margin-top: 60px;
+    }
+
+    /* RESPONSIVE */ /* Chú thích tùy chỉnh cho màn hình nhỏ */
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      .location-table th:nth-child(4), .location-table td:nth-child(4) { display: none; } /* Ẩn cột hành động trên mobile */
+    }
+  </style>
+</head>
+<body>
+
+<header> <!-- Mở phần Header -->
+  <h1>Danh Sách Địa Điểm</h1>
+  <p>Tổng hợp các tọa độ du lịch không thể bỏ qua tại Việt Nam</p>
+</header>
+
+<nav> <!-- Mở thanh điều hướng -->
+  <a href="index.html">Trang chủ</a>
+  <a href="where.html" class="active">Địa điểm</a> <!-- Nút đang chọn -->
+  <a href="food.html">Ẩm thực</a>
+  <a href="vanhoa.html">Văn hóa</a>
+</nav>
+
+<div class="container"> <!-- Nội dung chính -->
+  <h2 class="page-title">📍 Chi Tiết Các Điểm Đến Tuyệt Đẹp</h2>
+  <p class="welcome-text">
+    Chào mừng bạn đến với trang tổng hợp địa điểm du lịch. Dưới đây là bảng thông tin chi tiết giúp bạn dễ dàng tra cứu, so sánh các điểm đến hot nhất trải dài từ Bắc vào Nam, phục vụ cho chuyến đi sắp tới của bạn.
+  </p>
+  
+  <div class="mien-desc"> <!-- Khung mô tả 3 miền -->
+    <strong>Thông tin tổng quan 3 miền:</strong><br>
+    • <span style="color:#c0392b; font-weight:bold">Miền Bắc:</span> Nổi tiếng với lịch sử lâu đời, các dãy núi hùng vĩ, ruộng bậc thang mờ sương và các di sản thiên nhiên thế giới hoang sơ.<br>
+    • <span style="color:#d35400; font-weight:bold">Miền Trung:</span> Thu hút du khách bởi dải bờ biển xanh ngắt, các bãi tắm cát trắng mịn cùng hệ thống đô thị cổ, cố đô mang đậm giá trị văn hóa và kiến trúc cổ xưa.<br>
+    • <span style="color:#27ae60; font-weight:bold">Miền Nam:</span> Mang vẻ đẹp sông nước hiền hòa, thiên đường biển đảo nhiệt đới ngập tràn nắng gió cùng các đô thị sầm uất, hiện đại bậc nhất.
+  </div>
+  
+  <table class="location-table"> <!-- Bảng chứa danh sách -->
+    <thead>
+      <tr>
+        <th>Hình ảnh</th>
+        <th>Tên địa điểm</th>
+        <th>Vùng miền</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=150" class="thumb-img" alt="Hạ Long"></td>
+        <td><strong>Vịnh Hạ Long</strong><br><small style="color:#777">Kỳ quan thiên nhiên thế giới</small></td>
+        <td><span style="color:#c0392b; font-weight:600">🔴 Miền Bắc</span></td>
+        <td><a href="vinhhalong.html" class="btn-view">Khám phá</a></td> 
+      </tr>
+      <tr>
+        <td><img src="https://eggyolk.vn/wp-content/uploads/2024/08/Nhung-dia-diem-tham-quan-mien-phi-o-ha-noi.jpg" class="thumb-img" alt="Hà Nội"></td>
+        <td><strong>Thủ đô Hà Nội</strong><br><small style="color:#777">Phố cổ nghìn năm văn hiến</small></td>
+        <td><span style="color:#c0392b; font-weight:600">🔴 Miền Bắc</span></td>
+        <td><a href="hanoi.html" class="btn-view">Khám phá</a></td>
+      </tr>
+      <!-- ĐÃ XÓA DÒNG ĐÀ NẴNG TẠI ĐÂY -->
+      <tr>
+        <td><img src="https://langchaixua.com/wp-content/uploads/2024/10/z5984579390265_88f45fb549228bdac2f9e9efc75d257b.jpg" class="thumb-img" alt="Hội An"></td>
+        <td><strong>Phố cổ Hội An</strong><br><small style="color:#777">Di sản văn hóa thế giới cổ kính</small></td>
+        <td><span style="color:#d35400; font-weight:600">🟠 Miền Trung</span></td>
+        <td><a href="hoian.html" class="btn-view">Khám phá</a></td>
+      </tr>
+      <tr>
+        <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWf6RcRzCu2-rQre1ZdmpXqGGCyEvAS8ZUVKvGCdvZJy6k5LVOgIP4lL0&s=10" class="thumb-img" alt="Phú Quốc"></td>
+        <td><strong>Đảo Ngọc Phú Quốc</strong><br><small style="color:#777">Thiên đường nghỉ dưỡng biển xanh</small></td>
+        <td><span style="color:#27ae60; font-weight:600">🟢 Miền Nam</span></td>
+        <td><a href="phuquoc.html" class="btn-view">Khám phá</a></td>
+      </tr>
+      <tr>
+        <td><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=150" class="thumb-img" alt="TP.HCM"></td>
+        <td><strong>TP. Hồ Chí Minh</strong><br><small style="color:#777">Đô thị sầm uất, hoa lệ</small></td>
+        <td><span style="color:#27ae60; font-weight:600">🟢 Miền Nam</span></td>
+        <td><a href="hochiminh.html" class="btn-view">Khám phá</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>© 2026 Du Lịch Việt Nam | Website giới thiệu du lịch ba miền</footer> <!-- Chân trang -->
+</body>
+</html>

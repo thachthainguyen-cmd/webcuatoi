@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Huế - Du Lịch Việt Nam</title>
+  <style>
+    /* NHÓM CẤU HÌNH FONT & RESET */
+    /* Import font chữ Inter từ Google Fonts để tạo vẻ hiện đại, sang trọng */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    /* Reset: Loại bỏ khoảng cách mặc định của trình duyệt cho tất cả các thẻ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    /* Thiết lập font chính, màu chữ và chiều cao dòng cho toàn bộ văn bản */
+    body { font-family: 'Inter', sans-serif; color: #111111; background-color: #ffffff; line-height: 1.8; -webkit-font-smoothing: antialiased; } 
+    
+    /* NHÓM THANH ĐIỀU HƯỚNG (NAVBAR) */
+    /* nav: Định nghĩa thanh menu cố định trên cùng */
+    nav { 
+      background: #0071ba; /* Màu xanh thương hiệu du lịch */
+      display: flex; /* Dùng flexbox để dàn hàng ngang */
+      justify-content: center; /* Căn giữa các mục menu */
+      align-items: center;
+      gap: 15px; /* Khoảng cách giữa các link */
+      padding: 15px 20px; 
+      position: fixed; top: 0; left: 0; right: 0; /* Cố định vị trí trên màn hình */
+      z-index: 1000; /* Đảm bảo menu luôn nằm trên cùng */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho thanh menu */
+    } 
+    /* Định dạng cho từng đường link trong menu */
+    nav a { 
+      color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.95rem; 
+      transition: all 0.25s ease; padding: 8px 20px; border-radius: 20px; 
+    } 
+    /* Hiệu ứng mờ nhẹ khi di chuột vào menu */
+    nav a:hover { background: rgba(0, 0, 0, 0.1); }
+    /* Định dạng trạng thái cho link đang active */
+    nav a.active { background: #00558c; color: #ffffff; }
+    
+    /* NHÓM HERO BANNER (ẢNH CHÍNH) */
+    /* .hero-banner: Khối banner lớn chứa ảnh nền */
+    .hero-banner { position: relative; width: 100%; height: 65vh; background: url('https://toquoc.mediacdn.vn/280518851207290880/2023/12/4/hue-imperial-gate-1024x683-754-17016811818591749547652.png') center/cover no-repeat; margin-top: 65px; display: flex; align-items: flex-end; }
+    /* .hero-overlay: Lớp phủ mờ giúp chữ trắng nổi bật trên ảnh nền */
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%); }
+    /* .hero-content: Khung chứa tiêu đề và nhãn thông tin trong banner */
+    .hero-content { position: relative; max-width: 1140px; margin: 0 auto; width: 100%; padding: 40px 24px; color: white; z-index: 10; }
+    .hero-content h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    
+    /* NHÓM THÔNG TIN NHÃN (META TAGS) */
+    .place-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; font-size: 0.95rem; font-weight: 500; } 
+    .rating { background: rgba(255, 255, 255, 0.25); padding: 6px 14px; border-radius: 8px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-weight: 700; } 
+    .badge { background: #ffffff; color: #000000; padding: 6px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); } 
+    .location-tag { display: flex; align-items: center; gap: 4px; text-shadow: 0 1px 5px rgba(0,0,0,0.5); font-weight: 600; }
+    
+    /* CẤU TRÚC LAYOUT CHÍNH */
+    .container { max-width: 1140px; margin: 40px auto; padding: 0 24px; } 
+    
+    /* BREADCRUMB: Thanh điều hướng chỉ đường */
+    .breadcrumb { font-size: 0.85rem; color: #888888; margin-bottom: 30px; font-weight: 500; } 
+    .breadcrumb a { color: #555555; text-decoration: none; } 
+    .breadcrumb a:hover { color: #000000; text-decoration: underline; } 
+    
+    /* GALLERY: Khối lưới 2 cột hiển thị hình ảnh */
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 50px; } 
+    .gallery .img-box { overflow: hidden; border-radius: 12px; height: 320px; background: #f5f5f5; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; } /* Hiệu ứng chuyển động ảnh */
+    .gallery .img-box:hover img { transform: scale(1.03); } /* Zoom nhẹ khi di chuột */
+    
+    /* LAYOUT BÀI VIẾT (MAIN + SIDEBAR) */
+    .content-layout { display: grid; grid-template-columns: 1.9fr 1.1fr; gap: 60px; } 
+    .main-text section { margin-bottom: 45px; } 
+    .main-text h2 { color: #000000; font-size: 1.6rem; margin-bottom: 20px; font-weight: 700; letter-spacing: -0.5px; } 
+    .main-text p { color: #444444; margin-bottom: 20px; text-align: justify; font-size: 1.05rem; } 
+    .main-text ul { list-style: none; } 
+    .main-text li { margin-bottom: 20px; font-size: 1.05rem; color: #444444; border-left: 2px solid #000000; padding-left: 16px; } 
+    .main-text li b { color: #000000; font-weight: 600; display: block; margin-bottom: 4px; }
+    
+    /* SIDEBAR: Khối thông tin bổ trợ */
+    .sidebar { position: relative; } 
+    .widget { background: #ffffff; padding: 30px; border-radius: 16px; border: 1px solid #e5e7eb; box-shadow: 0 10px 30px rgba(0,0,0,0.04); position: sticky; top: 110px; } /* Sticky giúp sidebar bám theo người xem */
+    .widget h3 { font-size: 1.25rem; color: #000000; margin-bottom: 24px; font-weight: 700; letter-spacing: -0.3px; } 
+    .info-list { list-style: none; } 
+    .info-list li { margin-bottom: 24px; font-size: 1rem; color: #444444; } 
+    .info-list li:last-child { margin-bottom: 0; }
+    .info-list li b { color: #000000; font-weight: 700; display: block; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; } 
+    
+    /* FOOTER: Chân trang */
+    footer { background: #f9f9f9; color: #888888; text-align: center; padding: 50px 20px; font-size: 0.9rem; margin-top: 100px; border-top: 1px solid #eee; font-weight: 400; } 
+    
+    /* RESPONSIVE: Thiết lập hiển thị cho di động (Màn hình < 900px) */
+    @media (max-width: 900px) { 
+      .gallery, .content-layout { grid-template-columns: 1fr; gap: 30px; } /* Đưa về 1 cột */
+      .hero-content h1 { font-size: 2.3rem; }
+      .hero-banner { height: 45vh; }
+      .widget { position: relative; top: 0; }
+      .container { margin: 20px auto; }
+    } 
+  </style>
+</head>
+<body> 
+  <!-- Menu chính -->
+  <nav> 
+    <a href="index.html">Trang chủ</a> 
+    <a href="where.html" class="active">Địa điểm</a> 
+    <a href="amthuc.html">Ẩm thực</a> 
+    <a href="vanhoa.html">Văn hóa</a> 
+  </nav> 
+
+  <!-- Banner Hero hiển thị ảnh bìa cố đô -->
+  <div class="hero-banner">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Khám Phá Cố Đô Huế</h1> 
+      <div class="place-meta"> 
+        <span class="rating">⭐ 4.8 (4,950 đánh giá)</span> 
+        <span class="badge">Quần thể di tích Cố đô</span> 
+        <span class="location-tag">📍 Thừa Thiên Huế, Việt Nam</span> 
+      </div>
+    </div>
+  </div>
+
+  <div class="container"> 
+    <!-- Thanh Breadcrumb chỉ dẫn đường mục -->
+    <div class="breadcrumb"><a href="index.html">Trang chủ</a> &gt; <a href="where.html">Địa điểm</a> &gt; <span>Huế</span></div> 
+    
+    <!-- Lưới ảnh (Gallery) -->
+    <section class="gallery"> 
+      <div class="img-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR80fq1FqAdllMTZDmjmfiFp3zJV8kSRyz1eBU4JI2PkMpFgDry-kXmVw&s=10" alt="Lăng tẩm uy nghiêm ở Huế"></div> 
+      <div class="img-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqsSjKGkc4o-uYCzmeb_5Zui2IFbDJHOoZnXUVtj1w-A&s=10" alt="Cửa Ngọ Môn - Đại nội Huế"></div> 
+    </section> 
+
+    <!-- Nội dung chính và Sidebar -->
+    <div class="content-layout"> 
+      <main class="main-text"> 
+        <section> 
+          <h2>Giới thiệu về Cố đô Huế</h2> 
+          <p>Huế từng là kinh đô của Việt Nam dưới triều đại nhà Nguyễn từ năm 1802 đến năm 1945. Nằm yên bình bên bờ sông Hương mộng mơ, Huế sở hữu kho tàng di sản văn hóa vật thể và phi vật thể đồ sộ được UNESCO công nhận. Nơi đây mang một vẻ đẹp tĩnh lặng, trầm mặc, ghi dấu lịch sử vàng son qua những hoàng cung, thành quách và lăng tẩm vương triều.</p> 
+        </section> 
+        <section> 
+          <h2>Trải nghiệm không thể bỏ qua</h2> 
+          <ul> 
+            <li><b>Tham quan Kinh thành Huế (Đại Nội):</b> Bước qua cổng Ngọ Môn, dạo bước qua Điện Thái Hòa, Tử Cấm Thành để chiêm ngưỡng nơi ở và làm việc của 13 vị vua triều Nguyễn ngoài đời thực.</li> 
+            <li><b>Khám phá hệ thống Lăng tẩm hoàng gia:</b> Chiêm ngưỡng nét kiến trúc giao thoa Đông - Tây độc đáo tại Lăng Khải Định, vẻ đẹp thơ mộng của Lăng Tự Đức, hay sự uy nghiêm, chuẩn mực của Lăng Minh Mạng.</li> 
+            <li><b>Nghe ca Huế trên sông Hương về đêm:</b> Xuống thuyền rồng tại bến Tòa Khâm khi phố lên đèn, thả hồn theo những điệu hò, điệu lý và nhã nhạc cung đình Huế nguyên bản vang vọng trên mặt nước.</li> 
+          </ul> 
+        </section> 
+      </main> 
+      
+      <aside class="sidebar"> 
+        <div class="widget"> 
+          <h3>Thông tin hữu ích</h3> 
+          <ul class="info-list"> 
+            <li> <b>Thời điểm lý tưởng</b><br>Thời điểm lý tưởng</b>Từ tháng 1 đến tháng 4 hàng năm. Đây là thời điểm mùa xuân ở Huế, tiết trời se lạnh mát mẻ, nắng nhẹ dịu dàng, cực kỳ thích hợp cho việc đi bộ tham quan các di tích ngoài trời mà không lo bị oi bức.</li> 
+            <li> <b>Ẩm thực đặc sắc</b><br>Bún bò Huế chuẩn vị (cay nồng, thơm mùi mắm ruốc), các loại bánh lọc, bánh bèo, bánh nậm, cơm hến vỉa hè, chè hẻm 20 món và kẹo mè xửng truyền thống.</li> 
+          </ul> 
+        </div> 
+      </aside> 
+    </div> 
+  </div> 
+
+  <!-- Chân trang -->
+  <footer>© 2026 Du Lịch Việt Nam | Website giới thiệu du lịch ba miền</footer>
+</body>
+</html>
